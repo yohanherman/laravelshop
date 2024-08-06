@@ -9,18 +9,27 @@ class products extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['productname', 
-    'productprice', 
-    'description',
-    'quantity_in_stock',
-    'origin',
-    'categories_id',
-    'Avis_id',
-    'created_at',
-    'updated_at',
-    'taille_id', 
-    "couleur_id",
-];
+    protected $fillable = [
+        'productname',
+        'productprice',
+        'description',
+        'quantity_in_stock',
+        'origin',
+        'categories_id',
+        'Avis_id',
+        'created_at',
+        'updated_at',
+        'taille_id',
+        "couleur_id",
+    ];
+
+
+    public function cart()
+    {
+        // return $this->belongsTo(cart::class);
+        return $this->hasOne(Cart::class, 'product_id');
+    }
+
 
     public function image_cover()
     {

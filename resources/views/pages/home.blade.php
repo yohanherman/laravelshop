@@ -22,21 +22,29 @@
 </div>
 
 
-<a href="#">
     <div class='grid grid-cols-2 grid-rows-3 mt-10 md:flex '>
         @foreach( $randomProducts as $randomProduct )
-        <div class=" border shadow-lg m-1 rounded-lg">
-            <img src="/images/{{$randomProduct->cover}}" alt="cover">
-            <div class="p-2">
-            <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
-            <p>{{ $randomProduct->origin}}</p>
-            <p>ici les etoiles</p>
-            <p class='font-bold'>{{ $randomProduct->productprice}} EUR</p>
-            </div>
-        </div>
+            <a class='relative' href="{{url('/productDetailedpage' , $randomProduct->id)}}">
+                <div class=" border shadow-lg m-1 rounded-lg">
+                    <img src="/images/{{$randomProduct->cover}}" alt="cover">
+                    <div class="p-2">
+                    <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
+                    <p class="p">{{ $randomProduct->origin}}</p>
+                    <p>ici il y'aura les avis</p>
+                    <p class='font-bold'>{{ $randomProduct->productprice}} EUR</p>
+                    </div>
+                    
+                    <div class="absolute top-2 right-2">
+                    @if($randomProduct->product_discount)
+                    <p class='bg-red-600 p-2 text-white rounded'>{{$randomProduct->product_discount}} % OFF</p>
+                    @else
+                    {{-- <p>discount non dispo</p> --}}
+                    @endif
+                    </div>
+                </div>
+            </a>
         @endforeach
     </div>
-</a>
 
 
 @endsection
