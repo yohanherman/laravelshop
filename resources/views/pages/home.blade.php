@@ -28,16 +28,26 @@
                 <div class=" border shadow-lg m-1 rounded-lg">
                     <img src="/images/{{$randomProduct->cover}}" alt="cover">
                     <div class="p-2">
-                    <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
-                    <p class="p">{{ $randomProduct->origin}}</p>
-                    <p>ici il y'aura les avis</p>
-                    <p class='font-bold'>{{ $randomProduct->productprice}} EUR</p>
+                        <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
+                        <p class="p">{{ $randomProduct->origin}}</p>
+                        <p>ici il y'aura les avis</p>
+
+                        @if(empty($randomProduct->product_discount || $randomProduct->product_discount === 0))
+                            <p class='font-bold'>{{ $randomProduct->productprice}} EUR</p>
+                        @else
+                        <div class='flex'>
+                            <p class='line-through opacity-50 mr-4'>{{ $randomProduct->productprice}} EUR</p>
+                            <p class='font-bold'>{{$randomProduct->productprice * (1 - $randomProduct->product_discount/100) }} EUR</p>
+                        </div>
+                        @endif
+
                     </div>
+
                     
                     <div class="absolute top-2 right-2">
-                    @if($randomProduct->product_discount)
-                    <p class='bg-red-600 p-2 text-white rounded'>{{$randomProduct->product_discount}} % OFF</p>
-                    @else
+                        @if($randomProduct->product_discount)
+                        <p class='bg-red-600 p-2 text-white rounded'>{{$randomProduct->product_discount}} % OFF</p>
+                        @else
                     {{-- <p>discount non dispo</p> --}}
                     @endif
                     </div>

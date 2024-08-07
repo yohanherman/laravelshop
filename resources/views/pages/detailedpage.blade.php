@@ -6,10 +6,28 @@
 
     @section('content')
         <div class="p-2">
-            <img class="my-3" src="/images/basket1.jpg" alt="image-produit">
+            <div>
+               <img class="my-3" src="/images/basket1.jpg" alt="image-produit">
+            </div>
+
+            @if($data->product_discount || $data->product_discount === 0)
+            <div class="flex justify-end">
+               <p class='bg-red-500 w-20 text-white rounded p-1 my-1 '>{{$data->product_discount}} % OFF</p>
+            </div>
+            @endif
+
             <div class="capitalize">
                 <p>{{$data->productname}}</p>
-                <p>{{$data->productprice}} €</p>
+
+                @if($data->product_discount)
+                    <div class='flex'>
+                        <p class="line-through opacity-50">{{$data->productprice}} €</p>
+                        <p class='ml-4 font-bold'>{{$data->productprice * (1 - $data->product_discount/100)}} EUR</p>
+                    </div>
+                @else
+                   <p class="font-bold">{{$data->productprice}} EUR</p>
+                @endif
+
                 <p>{{$data->description}}</p>
 
                 <form action="{{ route('cart.store') }}" method="POST">
@@ -38,7 +56,6 @@
                         <p class="text-red-500 font-bold uppercase my-3">en rupture</p>   
                         <input class="border w-full bg-amber-400 rounded p-2 opacity-40 m-3 " type ="submit" disabled value='Ajouter au panier'>
                         @endif
-
                 </form>
 
             </div>

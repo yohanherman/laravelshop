@@ -6,26 +6,35 @@
 @include('components.navbar')
 
 @if(session()->has('success'))
-<div>
-  {{ session('success')}}
+<div class="flex justify-center text-white my-5 bg-green-500 p-2 mx-5">
+  <p class=>{{ session('success')}}</p>
 </div>
 @endif
-
 
 @section('content')
 
 @if(!isset($datas) || $datas->isEmpty())
-  <div class='text-center mt-10'>Your cart is currently empty</div>
+<div class='text-center mt-10'>Your cart is currently empty</div>
 @else
 
+  @php
+    $subtotalAmount = 0;
+  @endphp
+
 @foreach($datas as $data)
+  @php
+    $quantity = $data->quantity ;
+    $everyproductprice = $data->productprice * (1 - $data->product_discount/100);
+    $totalwithdiscount = $everyproductprice * $quantity ;
+    $subtotalAmount += $totalwithdiscount;
+  @endphp
+
 <div class="shadow-md m-2">
-<div class='flex justify-between my-5'>
-  <div class="font-bold text-2xl ml-7">
+<div class='flex justify-between my-5 '>
+  <div class="font-bold text-2xl ml-7 ">
     <h2>{{$data->productname}}</h2>
   </div>
 
-    {{-- <p>je suis l'identifiant {{$data->product_id}}</p> --}}
   <form action="{{ route('cart.remove', $data->product_id)}}" method="post">
     @method('delete')
     @csrf
@@ -76,17 +85,24 @@
 
     </div>
 
-    <div class='font-bold'>
-      <p class='text-2xl'> {{$data->productprice}} €</p>
+    <div class=''>
+      @if($data->product_discount)
+      <p class='line-through opacity-50'> {{$data->productprice}} €</p>
+        <p class='text-2xl font-bold'>{{$data->productprice * (1 - $data->product_discount/100)}} €</p>
+        @else
+        <p class='text-2xl font-bold'> {{$data->productprice}} €</p>
+      @endif
     </div>
-
     {{-- <p>{{$data->name}}  --}}
   </div>
 </div>
 @endforeach
 @endif
 
-<p>total : {{$total}} €</p>
+{{-- <p>total : {{$total}} €</p> --}}
+@if(isset($subtotalAmount))
+<div class="m-3 ">Sous-total <span class='font-bold'>{{ $subtotalAmount}} €</span></div>
+@endif
 
 
 @endsection
