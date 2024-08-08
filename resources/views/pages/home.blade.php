@@ -1,6 +1,7 @@
 @extends('base')
     
 @include('components.navbar')
+@section('title', 'Home')
 
 @section('content')
 

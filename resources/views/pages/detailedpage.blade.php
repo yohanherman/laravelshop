@@ -44,7 +44,8 @@
                             <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2'>
                         </div>
 
-                        <input type='text' value='1' name="user_id">
+
+                        <input type='hidden' value='{{ Auth::user()->id }}' name="user_id">
 
                         @if($data->status === 1)
                         <p class="text-green-600 font-bold uppercase my-3">en stock</p>    

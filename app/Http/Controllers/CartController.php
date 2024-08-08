@@ -11,19 +11,22 @@ class CartController extends Controller
 {
     public function showCart()
     {
-        // $data = cart::all();
+        $user_id = auth()->id();
+        if (!$user_id) {
+            return redirect()->route('login')->with('error', 'you must be connected');
+        }
         $datas = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
             ->join('tailles', 'tailles.id', '=', 'carts.taille_id')
             ->join('users', 'users.id', '=', 'carts.user_id')
             ->select('products.*', 'carts.*', 'tailles.*', 'users.name')
-            ->where('carts.user_id', "=", 1)
+            ->where('carts.user_id', "=", $user_id)
             ->get();
         // dd($data);
 
         $total = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
-            ->where('carts.user_id', '=', 1)
+            ->where('carts.user_id', '=', $user_id)
             ->selectRaw('SUM(carts.quantity * products.productprice) AS total')
             ->first();
 
@@ -92,6 +95,4 @@ class CartController extends Controller
         }
         return redirect()->route('cart.showCart');
     }
-
-
 }
