@@ -5,6 +5,7 @@
 
 @section('content')
 
+
 <img class='w-full opacity-75' src="images/coverimage.jpg" alt="cover">
 
 <div class="flex justify-center items-center my-4">

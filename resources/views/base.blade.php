@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{url('CSS/style.css')}}">
     <script src="https://kit.fontawesome.com/b713960f0d.js" crossorigin="anonymous"></script>
     {{-- <title>Document</title> --}}
 </head>
@@ -18,5 +18,6 @@
     <div class="container">
         @yield('content')
     </div>
+    <script src='{{ asset('javascript/script.js') }}'></script>
 </body>
 </html>

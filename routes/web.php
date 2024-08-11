@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeControllers;
@@ -28,6 +29,13 @@ Route::post('/login', [AuthController::class, 'loginPost'])->name('post.login');
 Route::get('/register', [AuthController::class, 'register'])->name('get.register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('post.register');
 
-
-
 // });
+
+
+// routes for admin
+
+
+Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+});
+
