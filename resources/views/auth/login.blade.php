@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <div>
 
     <div>
@@ -21,12 +20,11 @@
     </div>
     <form action="{{route('post.login')}}" method='POST'>
         @csrf
-
         <div>
             <label for="email">email</label>
             <input type="text" name='email', id='email'>
             @error('email')
-                <p>{{$message}}</p>
+                <p class="text-red-500">{{$message}}</p>
             @enderror
         </div>
         <div>
@@ -36,12 +34,9 @@
                 <p>{{$message}}</p>
             @enderror
         </div>
-
         <div>
             <input type="submit" value='se connecter'>
         </div>
-
-
     </form>
 </div>
 
