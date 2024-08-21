@@ -23,7 +23,17 @@
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
+
+      <div>
+        @if(session()->has('success'))
+          <p>{{session('success')}}</p>
+        @endif
+      </div>
+
       <div class="container-fluid">
+        <div class="d-flex justify-content-end m-3">
+          <a class=' bg-primary p-1 rounded' href="{{route('form.create')}}">add product</a>
+        </div>
         <table class="table table-dark table-hover">
           <thead>
             <tr>
@@ -49,7 +59,7 @@
               <td>{{$product->origin}}</td>
               <td><img src={{$product->cover}} alt={{$product->productname}}></td>
               <td>les avis</td>
-              <td class=''><a class="mx-1 bg-danger p-1 rounded">Delete</a><a class="bg-primary p-1 rounded mx-1">Edit</a><a class="bg-primary p-1 rounded bg-success">See</a></td>
+              <td class=''><a class="mx-1 bg-danger p-1 rounded">Delete</a><a class="bg-primary p-1 rounded mx-1">Edit</a><a href='' class="bg-primary p-1 rounded bg-success">See</a></td>
               {{-- <td>les avis</td> --}}
             </tr>
           </tbody>

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\cart;
+use App\Models\categories;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 $view->with('cartCount', 0);
             }
+
+            $categories = categories::all();
+            $view->with('categories', $categories);
         });
     }
 }

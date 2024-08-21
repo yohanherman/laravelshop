@@ -13,14 +13,12 @@ class products extends Model
         'productname',
         'productprice',
         'description',
-        'quantity_in_stock',
         'origin',
         'categories_id',
-        'Avis_id',
+        // 'Avis_id',
+        'status',
         'created_at',
         'updated_at',
-        'taille_id',
-        "couleur_id",
     ];
 
 
