@@ -26,7 +26,35 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       <img src="{{$product->cover}}" alt="{{$product->productname}}"> 
+        <div>
+            <div class="my-3 mx-2">
+              <h4>{{$product->productname}}</h4>
+            </div>
+          <div class="d-flex">
+             <img src="{{asset($product->cover)}}" alt="{{$product->productname}}"> 
+            <div class='d-flex flex-column'>
+              <img src="" alt="image1">
+              <img src="" alt="image2">
+              <img src="" alt="image3">
+            </div>
+          </div>
+          <div class="m-1">
+            <p>Price : {{$product->productprice}}€</p>
+            <p>Description : {{$product->description}}</p>
+            <p>produit venu : {{$product->origin}}</p>
+            @if($product->product_discount)
+              <p>discount_rate : {{$product->product_discount}} OFF</p>
+            @else
+              <p> discount_rate : no discount</p>
+            @endif
+            @if($product->status == 1)
+              <p class="text-success"> Product in stock</p>
+            @else
+              <p class="text-danger">Product non available</p>
+            @endif
+
+          </div>
+        </div>
       </div>
     </section>
 

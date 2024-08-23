@@ -28,7 +28,7 @@
         @foreach( $randomProducts as $randomProduct )
             <a class='relative' href="{{url('/productDetailedpage' , $randomProduct->id)}}">
                 <div class=" border shadow-lg m-1 rounded-lg">
-                    <img src="/images/{{$randomProduct->cover}}" alt="cover">
+                    <img src="{{asset($randomProduct->cover)}}" alt="{{$randomProduct->productname}}">
                     <div class="p-2">
                         <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
                         <p class="p">{{ $randomProduct->origin}}</p>

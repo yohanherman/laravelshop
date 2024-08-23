@@ -44,6 +44,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function
         Route::get('/cart', [AdminCartController::class, 'index'])->name('get.cart');
         Route::get('/product/{id}', [productController::class, 'showProduct'])->name('show.product');
         Route::get('/addProduct',[productController::class ,'creationProductForm'])->name('form.create');
+        Route::get('/updateProduct/{id}', [productController::class, 'updateForm'])->name('get.updateProduct');
         Route::post('/addProduct',[productController::class, 'createProduct'])->name('post.createProduct');
+        Route::delete('/product/{id}', [productController::class, 'deleteProduct'])->name('delete.product');
+        Route::put('/updateproduct/{id}', [productController::class, 'updateProduct'])->name('post.updateProduct');
     });
 });

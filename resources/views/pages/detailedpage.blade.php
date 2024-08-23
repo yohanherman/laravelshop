@@ -7,7 +7,7 @@
     @section('content')
         <div class="p-2">
             <div>
-               <img class="my-3" src="/images/basket1.jpg" alt="image-produit">
+               <img class="my-3" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
             </div>
 
             @if($data->product_discount || $data->product_discount === 0)

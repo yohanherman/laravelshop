@@ -16,9 +16,11 @@ class products extends Model
         'origin',
         'categories_id',
         // 'Avis_id',
+        'product_discount',
         'status',
         'created_at',
         'updated_at',
+        'cover'
     ];
 
 

@@ -82,7 +82,6 @@ class CartController extends Controller
         return redirect()->route('cart.showCart');
     }
 
-
     public function decreaseQuantity(int $id)
     {
         $cartItem = cart::where('product_id', $id)->first();

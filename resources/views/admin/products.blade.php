@@ -26,7 +26,9 @@
 
       <div>
         @if(session()->has('success'))
-          <p>{{session('success')}}</p>
+          <p class='alert alert-success' role='alert'>
+            {{session('success')}}
+          </p>
         @endif
       </div>
 
@@ -57,9 +59,17 @@
               <td>{{$product->description}}</td>
               <td>{{$product->productprice}}</td>
               <td>{{$product->origin}}</td>
-              <td><img src={{$product->cover}} alt={{$product->productname}}></td>
+              <td><img class='w-25 h-25' src={{asset($product->cover)}} alt={{$product->productname}}></td>
               <td>les avis</td>
-              <td class=''><a class="mx-1 bg-danger p-1 rounded">Delete</a><a class="bg-primary p-1 rounded mx-1">Edit</a><a href='' class="bg-primary p-1 rounded bg-success">See</a></td>
+              <td class='d-flex '>
+                <form action="{{route('delete.product',$product->id)}}"method='post'>
+                    @csrf
+                    @method('DELETE')
+                  <button type='submit' class="mx-1 bg-danger rounded block border-0 p-1">Delete</button>
+                </form>
+                <a href='{{route('get.updateProduct',$product->id)}}' class="bg-primary p-1 rounded mx-1">Edit</a>
+                <a href='{{route('show.product',$product->id)}}' class="bg-primary p-1 rounded bg-success">view</a>
+              </td>
               {{-- <td>les avis</td> --}}
             </tr>
           </tbody>
@@ -73,7 +83,6 @@
           @if($products->previousPageUrl())
            <li class="page-item"><a class="page-link" href="{{$products->previousPageUrl()}}">Prev</a></li>
           @endif
-
 
           @for ( $i=1; $i <= $products->lastPage(); $i ++)
             <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">

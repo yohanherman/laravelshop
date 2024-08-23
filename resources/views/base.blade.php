@@ -11,11 +11,8 @@
     <script src="https://kit.fontawesome.com/b713960f0d.js" crossorigin="anonymous"></script>
     {{-- <title>Document</title> --}}
 </head>
-<header>
-
-</header>
 <body>
-    <div class="container">
+    <div class="container m-auto">
         @yield('content')
     </div>
     <script src='{{ asset('javascript/script.js') }}'></script>

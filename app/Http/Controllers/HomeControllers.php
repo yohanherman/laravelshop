@@ -11,7 +11,7 @@ class HomeControllers extends Controller
     public function getHomeData()
     {
         $categories = categories::all();
-        $randomProducts = DB::table('products')->inRandomOrder()->take(3)->get();
+        $randomProducts = DB::table('products')->inRandomOrder()->take(5)->get();
 
         $context = [
             'categories' => $categories,

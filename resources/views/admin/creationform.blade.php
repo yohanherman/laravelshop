@@ -29,7 +29,7 @@
         </div>
 
         <div>
-            <form action="{{route('post.createProduct')}}" method='POST'>
+            <form action="{{route('post.createProduct')}}" method='POST' enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                   <label for="productname" class="form-label">Title</label>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="discount" class="form-label">Discount</label>
-                  <input  name='product_discount' type="number" class="form-control" id="discount">
+                  <input  type="number" class="form-control" id="discount" name='product_discount' >
                     @error('product_discount')
                     <p>{{$message}}</p>
                     @enderror
@@ -83,10 +83,11 @@
                     <option value="0">rupture</option>
                   </select>
                 </div>
-                {{-- <div class="mb-3">
+
+                <div class="mb-3">
                   <label for="cover" class="form-label">Cover</label>
-                  <input type="file" class="form-control" id="cover">
-                </div> --}}
+                  <input type="file" class="form-control" id="cover" name='cover'>
+                </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
