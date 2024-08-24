@@ -1,13 +1,12 @@
-<div>
-
-    @extends('base')
+@extends('base')
     
     @include('components.navbar')
 
     @section('content')
-        <div class="p-2">
+    <div class="my-5 mx-5">
+        <div class="p-2 m-auto shadow-md md:w-1/2">
             <div>
-               <img class="my-3" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
+               <img id='product-cover' class="my-3 w-2/3" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
             </div>
 
             @if($data->product_discount || $data->product_discount === 0)
@@ -22,10 +21,10 @@
                 @if($data->product_discount)
                     <div class='flex'>
                         <p class="line-through opacity-50">{{$data->productprice}} €</p>
-                        <p class='ml-4 font-bold'>{{$data->productprice * (1 - $data->product_discount/100)}} EUR</p>
+                        <p class='ml-4 font-bold'>{{$data->productprice * (1 - $data->product_discount/100)}} €</p>
                     </div>
                 @else
-                   <p class="font-bold">{{$data->productprice}} EUR</p>
+                   <p class="font-bold">{{$data->productprice}} €</p>
                 @endif
 
                 <p>{{$data->description}}</p>
@@ -35,13 +34,31 @@
                         <div>
                             <input type="hidden" id='product_id' name='product_id' value='{{$data->id}}'>
                         </div>
+
+                        <div>colors : <span class="containerColor"></span>
+                            {{-- coulzur par defaut noir id=1 --}}
+                            <input type="hidden" id="color_id" name="colors_id" value="1">
+                        </div>
+
+                    
+
+                        <div class="flex">
+                            @foreach($options AS $option)
+                            <div class="colorSelect w-auto ml-1 p-1 " 
+                             style ='background-color: {{$option->hex_code}};'
+                             data-colors-id = {{$option->id}}>
+                                    {{$option->colors}}
+                                </div>
+                            @endforeach
+                        </div>
+
                         <select class='border font-bold my-2' name="taille_id" id="tailles">
                             @foreach($tailles as $taille)
                             <option class='' value="{{$taille->id}}">{{$taille->taille}}</option>
                             @endforeach
                         </select>
                         <div class='my-2'>
-                            <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2'>
+                            <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2 focus:border-blue-400 focus:outline-none'>
                         </div>
 
                         @auth
@@ -55,13 +72,17 @@
                             {{-- <button class="border bg-amber-400 w-full p-2 rounded m-3" type ="submit">ajouter</button> --}}
                         </div>
                         @else
+
                         <p class="text-red-500 font-bold uppercase my-3">en rupture</p>   
-                        <input class="border w-full bg-amber-400 rounded p-2 opacity-40 m-3 " type ="submit" disabled value='Ajouter au panier'>
+                        <input class="border w-full bg-amber-400 rounded p-2 opacity-40" type ="submit" disabled value='Ajouter au panier'>
                         @endif
                 </form>
 
+                {{-- @foreach($options AS $option)
+                    <p>{{$option->colors}}</p>
+                @endforeach --}}
+
             </div>
         </div>
+    </div>
     @endsection
-
-</div>

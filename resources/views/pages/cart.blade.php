@@ -46,7 +46,7 @@
 
   <div class='flex justify-around p-2'>
     <div>
-    <img class='w-40 h-40' src="/images/basket1.jpg" alt="image_product">
+    <img class='w-40 h-40' src="{{asset($data->cover)}}" alt="image_product">
     </div>
 
     <div>
@@ -71,8 +71,13 @@
       </div>
 
       <div class='uppercase mt-2'>
-        <p class='ml-4'>Taille</p>
+        <p class='ml-4'>Size</p>
         <p class='ml-5 border rounded-lg p-1'>{{$data->taille}} 
+      </div>
+
+      <div class='uppercase mt-2'>
+        <p class='ml-4'>Color</p>
+        <p class='ml-5 border rounded-lg p-1'>{{$data->colors}}</p>
       </div>
 
       <div>

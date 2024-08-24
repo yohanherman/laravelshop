@@ -5,8 +5,11 @@ use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\AdminCartController;
+use App\Http\Controllers\admin\optionsController;
+use App\Http\Controllers\ajaxController;
 use App\Http\Controllers\HomeControllers;
 use App\Http\Controllers\ProductdetailedController;
+use App\Http\Controllers\searchController;
 use App\Http\Middleware\adminAuth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +23,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [HomeControllers::class, 'getHomeData']);
-route::get('/productDetailedpage/{id}', [ProductdetailedController::class, 'getAProduct']);
+Route::get('/productDetailedpage/{id}', [ProductdetailedController::class, 'getAProduct']);
+
+// AJAX ROUTE
+Route::get('/get-product-image/{id}', [ajaxController::class, 'getProductImage']);
+
+// SEARCH ROUTE
+Route::get('/search',[searchController::class, 'seachProduct'])->name('search');
+
 
 // routes for users
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -28,7 +38,6 @@ Route::post('/login', [AuthController::class, 'loginPost'])->name('post.login');
 Route::get('/register', [AuthController::class, 'register'])->name('get.register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('post.register');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
 
 // routes for admin
 Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function () {
@@ -40,13 +49,18 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboardAdmin');
-        Route::get('/products', [productController::class, 'allProducts'])->name('get.products');
         Route::get('/cart', [AdminCartController::class, 'index'])->name('get.cart');
+
+        // PRODUCT ROUTES
+        Route::get('/products', [productController::class, 'allProducts'])->name('get.products');
         Route::get('/product/{id}', [productController::class, 'showProduct'])->name('show.product');
-        Route::get('/addProduct',[productController::class ,'creationProductForm'])->name('form.create');
+        Route::get('/addProduct', [productController::class, 'creationProductForm'])->name('form.create');
         Route::get('/updateProduct/{id}', [productController::class, 'updateForm'])->name('get.updateProduct');
-        Route::post('/addProduct',[productController::class, 'createProduct'])->name('post.createProduct');
+        Route::post('/addProduct', [productController::class, 'createProduct'])->name('post.createProduct');
         Route::delete('/product/{id}', [productController::class, 'deleteProduct'])->name('delete.product');
         Route::put('/updateproduct/{id}', [productController::class, 'updateProduct'])->name('post.updateProduct');
+
+        // OPTION ROUTES
+        Route::get('/options', [optionsController::class, 'index']);
     });
 });

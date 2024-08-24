@@ -37,6 +37,8 @@
               <img src="" alt="image2">
               <img src="" alt="image3">
             </div>
+
+     
           </div>
           <div class="m-1">
             <p>Price : {{$product->productprice}}€</p>

@@ -1,8 +1,8 @@
 @extends('base')
+
 @section('title','login')
 
 @section('content')
-
 <div>
 
     <div>
@@ -27,7 +27,7 @@
             </div>
             <div class="mt-8">
                 <div class="my-3">
-                    <input class="border rounded focus:border-blue-400 focus:outline-none w-full h-10 p-3" type="email" name='email', id='email_login'  placeholder='Email'>
+                    <input class="border rounded focus:border-blue-400 focus:outline-none w-full h-10 p-3" type="email" name='email', id='login_email'  placeholder='Email'>
                     @error('email')
                         <p class="text-red-500">{{$message}}</p>
                     @enderror

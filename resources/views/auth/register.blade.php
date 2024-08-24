@@ -5,8 +5,7 @@
 @section('content')
 
     <div>
-
-        <div class='mt-96 mx-5'>
+        <div class='mt-56 mx-5'>
             <form action="{{ route('post.register')}}" method="POST" class="p-4 border bg-gray-50 h-auto m-auto md:w-96">
                 @csrf
                 <div class="flex justify-center items-center">
@@ -24,6 +23,7 @@
                         @error('email')
                             <span class='text-red-500'>{{$message}}</span>
                         @enderror
+                        <span class="emailError"></span>
                     </div>
                     <div class='my-3'>
                         <input  class=' rounded border w-full h-10 p-3 focus:border-blue-400 focus:outline-none' type="password" name='password' id='password' placeholder='Password'>

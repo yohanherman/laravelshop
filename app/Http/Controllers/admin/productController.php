@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\option;
 use App\Models\products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,14 @@ class productController extends Controller
     public function showProduct(int $id)
     {
         $product = DB::table('products')->where('id', $id)->first();
+
+        // $option = option::where('product_id', $id)->get();
         // dd($product);
-        return view('admin.showproduct', ['product' => $product]);
+        $context = [
+            'product' => $product,
+            // 'options' => $option
+        ];
+        return view('admin.showproduct', $context);
     }
 
     public function creationProductForm()

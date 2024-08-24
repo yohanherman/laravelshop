@@ -26,7 +26,12 @@
 
       <div>
         @if(session()->has('error'))
-            <p>{{session('error')}}</p>
+            <p class="mx-auto alert alert-danger" role="alert">{{session('error')}}</p>
+        @endif
+    </div>
+      <div>
+        @if(session()->has('success'))
+            <p class=" mx-auto alert alert-success" role="alert">{{session('success')}}</p>
         @endif
     </div>
 
@@ -36,7 +41,7 @@
           <input type="email" class="form-control" placeholder="Email" name='email'>
         </div>
         @error('email')
-          <p>{{$message}}</p>
+          <p class="text-danger">{{$message}}</p>
         @enderror
         
 
@@ -44,7 +49,7 @@
           <input type="password" class="form-control" placeholder="Password" name='password'>
         </div>
         @error('password')
-          <p>{{$message}}</p>
+          <p class="text-danger">{{$message}}</p>
         @enderror
 
         <div class="row">
@@ -68,7 +73,7 @@
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{route('getRegister')}}" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.login-card-body -->

@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // sidebar
+    // SIDEBAR
     const sidebar = document.querySelector('.sidebar');
     const burgerremove = document.querySelector('.burger-remove')
     const burger = document.querySelector('.fa-bars')
-    
-    burger.addEventListener('click' , function(){
+    const ul = document.querySelector('.ul')
+ 
+    burger.addEventListener('click' , function(e){
+        e.preventDefault()
         sidebar.style.transform = 'translateX(0)'
     })
     
@@ -16,18 +18,61 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.style.display= 'flex'
         sidebar.style.visibility= 'visible'
     })
-    
+
+    // REQUETE AJAX
+    const selectColor = document.querySelectorAll('.colorSelect')
+    // const test =document.querySelector('.test')
+    const productCover =document.querySelector('#product-cover')
+    const colorInput = document.querySelector('#color_id')
+    const containerColorName = document.querySelector('.containerColor')
+    console.log(containerColorName)
+
+
+ 
+    selectColor.forEach(function(div){
+        div.addEventListener('click', function(){
+            // je recupere la valeur de l'attribut data-colors-id
+            const colorsId = this.getAttribute('data-colors-id')
+
+            // je passe cette la valeur de cette id à mon champ caché
+            colorInput.value = colorsId
+
+            const url = '/get-product-image/' + colorsId
+
+            fetch(url)
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error('Erreur HTTP :' + response.status)
+                    }
+                    return response.json();
+                })
+                .then(data=>{
+                    if(data.images){
+                        // productCover.src = ''
+                        productCover.src = data.images
+                    }else{
+                        console.error('aucune image trouvé')
+                    }
+                    containerColorName.innerHTML= data.colors
+                    // console.log('Réponse reçue pour colorsId ' + colorsId + ':', data);
+                })
+                .catch(error =>{
+                    console.error('Erreur lors de la requête pour colorsId:' + colorsId, ':', error);
+                })
+        })
+
+    })
+
 })
 
- // registration field
+// registration field
 const password = document.querySelector('#password')
 const passwordConfirm = document.querySelector('#passwordConfirm')
 const message = document.querySelector('.message')
 const registerButton =document.querySelector('#registerButton')
-// const email = document.querySelectorAll('input[type="email"]')
+const emailError = document.querySelector('.emailError')
 const emailRegister = document.querySelector('#email_register');
-const emailLogin = document.querySelector('#email_login');
-// console.log(emails)
+
 
 registerButton.disabled = true
 registerButton.style.opacity = '0.4'
@@ -40,7 +85,7 @@ function checkpassword(){
             message.style.color = 'red'
             registerButton.disabled= true
             registerButton.style.opacity = '0.4' 
-              password.style.borderColor ='red'
+            password.style.borderColor ='red'
             passwordConfirm.style.borderColor ='red'
         }else{
             //  console.log('match')
@@ -60,35 +105,42 @@ function validateEmail(email){
     return regex.test(email)
 }
 
-emailRegister.addEventListener('keyup' , function(){
+// registration form client side
+function validateRegistration(){
+    emailRegister.addEventListener('keyup' , function(){
         if(validateEmail(emailRegister.value)){
-             // console.log('email correct')
-           emailRegister.style.borderColor = 'green'
+            // console.log('email correct')
+            emailRegister.style.borderColor = 'green'
         }else{
             // console.log('email incorrect')
-           emailRegister.style.borderColor = 'red'
+            emailRegister.style.borderColor = 'red'
+            registerButton.disabled = true
+    }})
+    registerButton.addEventListener('click', function(e){
+        if(!emailRegister.value){
+            emailError.textContent = 'The email field is required'
         }
     })
+}
+validateRegistration()
 
 
 
-//  //login field
-//  emailLogin.addEventListener('keyup' , function(){
+
+
+//login form client side
+// const emailLogin = document.querySelector('#login_email');
+// console.log(emailLogin)
+
+// function validateLoginForm(){
+//     emailLogin.addEventListener('keyup' , function(){
 //         if(validateEmail(emailLogin.value)){
-//             // console.log('email correct')
-//             emailLogin.style.borderColor = 'green'
+//             console.log('email correct')
+//             // emailLogin.style.borderColor = 'green'
 //         }else{
-//             // console.log('email incorrect')
-//             emailLogin.style.borderColor = 'red'
-//           }
-//      })
-
-
-
-
-
-
-
-
-    
+//             console.log('email incorrect')
+//             // emailLogin.style.borderColor = 'red'
+//         }})
+// }
+// validateLoginForm()
 

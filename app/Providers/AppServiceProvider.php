@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
             $categories = categories::all();
             $view->with('categories', $categories);
+            
         });
     }
 }

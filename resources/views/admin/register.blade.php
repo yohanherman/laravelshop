@@ -24,6 +24,18 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Sign in</p>
 
+      <div>
+        @if(session()->has('error'))
+          <p class="mx-auto alert alert-danger" role="alert">{{session('error')}}</p>
+        @endif
+      </div>
+
+      {{-- <div>
+        @if(session()->has('success'))
+            <p class=" mx-auto alert alert-success" role="alert">{{session('success')}}</p>
+        @endif
+    </div> --}}
+
       <form action="{{ route('registerPost')}}" method="post">
         @csrf
         <div class="input-group mb-3">
@@ -33,7 +45,11 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-        </div>
+        </div>  
+        @error('name')
+        <p class='text-danger'>{{$message}}</p>
+        @enderror
+
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" name ='email'>
           <div class="input-group-append">
@@ -42,16 +58,25 @@
             </div>
           </div>
         </div>
+        @error('email')
+          <p class='text-danger'>{{$message}}</p>
+        @enderror
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name='password'>
+          <input type="password" class="form-control" placeholder="Password" name='password' id='adminPassword'>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+
+        @error('password')
+          <p class="text-danger">{{$message}}</p>
+        @enderror
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password" name='password_confirmation'>
+          <input type="password" class="form-control" placeholder="Retype password" name='password_confirmation' id='adminPasswordConfirm'>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -80,7 +105,7 @@
         </div>
       </form>
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="{{route('getLogin')}}" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

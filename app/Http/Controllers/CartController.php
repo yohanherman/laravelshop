@@ -18,8 +18,10 @@ class CartController extends Controller
         $datas = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
             ->join('tailles', 'tailles.id', '=', 'carts.taille_id')
+            ->join('colors', 'colors.id', '=', 'carts.colors_id')
+            // ->join()
             ->join('users', 'users.id', '=', 'carts.user_id')
-            ->select('products.*', 'carts.*', 'tailles.*', 'users.name')
+            ->select('products.*', 'carts.*', 'tailles.*', 'colors.*', 'users.name')
             ->where('carts.user_id', "=", $user_id)
             ->get();
         // dd($data);
@@ -44,6 +46,7 @@ class CartController extends Controller
             'product_id' => 'required',
             'taille_id' => 'required',
             'user_id' => 'required',
+            'colors_id' => 'required',
             'quantity' => 'required'
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -53,8 +56,9 @@ class CartController extends Controller
         $cartItem = cart::where('product_id', $request->product_id)->first();
         if ($cartItem) {
             // dd('je rentre ici');
-            $cartItem->quantity += 1;
+            $cartItem->quantity += $request->quantity;
             $cartItem->save();
+            return redirect()->route('cart.showCart');
         } else {
             // dd("jai rien trouvé donc je rentre ici");
             $cart = cart::create($request->all());

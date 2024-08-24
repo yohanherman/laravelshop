@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,8 +32,19 @@ class products extends Model
     }
 
 
-    public function image_cover()
+    public function images()
     {
-        return $this->hasMany(image_product::class);
+        return $this->hasMany(images::class);
+    }
+
+    public function options()
+    {
+        return $this->hasMany(Options::class);
+    }
+
+
+    public function taille()
+    {
+        return $this->hasMany(taille::class);
     }
 }
