@@ -35,14 +35,8 @@
                             <input type="hidden" id='product_id' name='product_id' value='{{$data->id}}'>
                         </div>
 
-                        <div>colors : <span class="containerColor"></span>
-                            {{-- coulzur par defaut noir id=1 --}}
-                            <input type="hidden" id="color_id" name="colors_id" value="1">
-                        </div>
 
-                    
-
-                        <div class="flex">
+                        {{-- <div class="flex">
                             @foreach($options AS $option)
                             <div class="colorSelect w-auto ml-1 p-1 " 
                              style ='background-color: {{$option->hex_code}};'
@@ -50,13 +44,15 @@
                                     {{$option->colors}}
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
 
-                        <select class='border font-bold my-2' name="taille_id" id="tailles">
-                            @foreach($tailles as $taille)
-                            <option class='' value="{{$taille->id}}">{{$taille->taille}}</option>
+                        {{-- <select class='border font-bold my-2' name="taille_id" id="tailles">
+                            @foreach($sizes as $size)
+                            <option class='' value="{{$size->id}}">{{$size->name}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+
+
                         <div class='my-2'>
                             <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2 focus:border-blue-400 focus:outline-none'>
                         </div>

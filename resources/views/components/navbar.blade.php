@@ -67,7 +67,7 @@
             </a>
             <a href="{{route('cart.showCart')}}" class="mr-1">
               <i class="fa-solid fa-cart-shopping"></i>
-              <div class="cartquantity ">{{$cartCount}}</div>
+              {{-- <div class="cartquantity ">{{$cartCount}}</div> --}}
             </a>
           </div>
         </nav>

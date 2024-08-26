@@ -37,14 +37,4 @@ class products extends Model
         return $this->hasMany(images::class);
     }
 
-    public function options()
-    {
-        return $this->hasMany(Options::class);
-    }
-
-
-    public function taille()
-    {
-        return $this->hasMany(taille::class);
-    }
 }

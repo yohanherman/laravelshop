@@ -17,11 +17,9 @@ class CartController extends Controller
         }
         $datas = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
-            ->join('tailles', 'tailles.id', '=', 'carts.taille_id')
-            ->join('colors', 'colors.id', '=', 'carts.colors_id')
             // ->join()
             ->join('users', 'users.id', '=', 'carts.user_id')
-            ->select('products.*', 'carts.*', 'tailles.*', 'colors.*', 'users.name')
+            ->select('products.*', 'carts.*','users.name')
             ->where('carts.user_id', "=", $user_id)
             ->get();
         // dd($data);
@@ -44,9 +42,7 @@ class CartController extends Controller
         // dd($request->product_id);
         $rules = [
             'product_id' => 'required',
-            'taille_id' => 'required',
             'user_id' => 'required',
-            'colors_id' => 'required',
             'quantity' => 'required'
         ];
         $validator = Validator::make($request->all(), $rules);

@@ -1,54 +1,64 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\option;
 use App\Models\products;
-use App\Models\taille;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductdetailedController extends Controller
 {
-    public function getAProduct(int $id)
+    public function getAProduct(int $product_id)
     {
-        $options = DB::table('options')
-            ->join('products', 'products.id', '=', 'options.product_id')
-            ->join('colors', 'colors.id', '=', 'options.colors_id')
-            ->select('products.*', 'colors.*')
-            ->where('options.product_id', '=', $id)
-            ->get();
+    //         $options = DB::table('product_options')
+    //             ->join('products', 'products.id', '=', 'product_options.product_id')
+    //             ->join('options', 'options.id', '=', 'product_options.option_id')
+    //             ->select('products.*', 'options.*', 'product_options.*')
+    //             ->where('product_id', '=', $id)
+    //             ->get();
+    //         // dd($options);
 
-        // dd($options);
 
-        $data = products::findOrFail($id);
-        $tailles = taille::all();
-        $context = [
-            'data' => $data,
-            'tailles' => $tailles,
-            'options' => $options
-        ];
-        return view('pages.detailedpage', $context);
+            $data = products::findOrFail($product_id);
+
+
+            // $option = testoption::findOrFail($product_id);
+
+            // $optionvalue = 
+
+            // $sizes = size::all();
+            // dd($size);
+
+
+            // Préparer les données pour la vue
+            $context = [
+                'data' => $data,
+                // 'sizes' => $sizes,
+                // 'options'=> $options
+
+            ];
+
+            return view('pages.detailedpage', $context);
+        }
+
+
+        // // public function getProductImage(int $id)
+        // // {
+        // //     $option = DB::table('options')
+        // //         ->join('colors', 'colors.id', '=', 'options.colors_id')
+        // //         ->where('colors_id', $id)
+        // //         ->select('options.images', 'colors.colors')
+        // //         ->first();
+
+        // //     // dd($option);
+
+        // //     if ($option) {
+        // //         $imageUrl = asset('images/' . $option->images);
+        // //         return response()->json([
+        // //             'images' => $imageUrl,
+        // //             'colors' => $option->colors
+        // //         ]);
+        // //     }
+        // //     return response()->json(['error' => 'Image not found'], 404);
+        // // }
     }
 
-
-    // public function getProductImage(int $id)
-    // {
-    //     $option = DB::table('options')
-    //         ->join('colors', 'colors.id', '=', 'options.colors_id')
-    //         ->where('colors_id', $id)
-    //         ->select('options.images', 'colors.colors')
-    //         ->first();
-
-    //     // dd($option);
-
-    //     if ($option) {
-    //         $imageUrl = asset('images/' . $option->images);
-    //         return response()->json([
-    //             'images' => $imageUrl,
-    //             'colors' => $option->colors
-    //         ]);
-    //     }
-    //     return response()->json(['error' => 'Image not found'], 404);
-    // }
-}

@@ -70,23 +70,14 @@
         </div>
       </div>
 
-      <div class='uppercase mt-2'>
-        <p class='ml-4'>Size</p>
-        <p class='ml-5 border rounded-lg p-1'>{{$data->taille}} 
-      </div>
-
-      <div class='uppercase mt-2'>
-        <p class='ml-4'>Color</p>
-        <p class='ml-5 border rounded-lg p-1'>{{$data->colors}}</p>
-      </div>
-
+{{-- 
       <div>
         @if($data->status ===1)
         <p class="text-green-500 ml-5 my-2">en stock</p>
         @else
         <p class='text-green-500'>rupture</p>
         @endif
-      </div>
+      </div> --}}
 
     </div>
 

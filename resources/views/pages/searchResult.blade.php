@@ -25,7 +25,7 @@
                         @else
                         <div class='flex'>
                             <p class='line-through opacity-50 mr-4'>{{ $data->productprice}} €</p>
-                            <p class='font-bold'>{{$data->productprice * (1 - $data->product_discount/100) }} EUR</p>
+                            <p class='font-bold'>{{$data->productprice * (1 - $data->product_discount/100) }} €</p>
                         </div>
                         @endif
 

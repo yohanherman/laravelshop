@@ -28,12 +28,11 @@ class AppServiceProvider extends ServiceProvider
                 $totalQuantity = cart::where('user_id', Auth::id())->sum('quantity');
                 $view->with('cartCount', $totalQuantity);
             } else {
-                $view->with('cartCount', 0);
+                $view->with('cartCount', '');
             }
 
             $categories = categories::all();
             $view->with('categories', $categories);
-            
         });
     }
 }
