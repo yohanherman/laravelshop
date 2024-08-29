@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\productController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\AdminCartController;
-use App\Http\Controllers\admin\optionsController;
 use App\Http\Controllers\ajaxController;
+use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\HomeControllers;
 use App\Http\Controllers\ProductdetailedController;
 use App\Http\Controllers\searchController;
@@ -22,14 +22,16 @@ Route::middleware('auth')->group(function () {
     Route::put('/cart/decrease-product/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
 });
 
+
 Route::get('/', [HomeControllers::class, 'getHomeData']);
+Route::get('/productbycategory/{id}', [HomeControllers::class,  'productByCategory'])->name('product.category');
 Route::get('/productDetailedpage/{id}', [ProductdetailedController::class, 'getAProduct']);
 
 // AJAX ROUTE
 Route::get('/get-product-image/{id}', [ajaxController::class, 'getProductImage']);
 
 // SEARCH ROUTE
-Route::get('/search',[searchController::class, 'seachProduct'])->name('search');
+Route::get('/search', [searchController::class, 'seachProduct'])->name('search');
 
 
 // routes for users
@@ -38,6 +40,9 @@ Route::post('/login', [AuthController::class, 'loginPost'])->name('post.login');
 Route::get('/register', [AuthController::class, 'register'])->name('get.register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('post.register');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('forget-password.get');
+Route::post('/forgot-password', [AuthController::class, 'forgotPasswordPost'])->name('forgot-password.post');
+Route::get('/reset/{token}', [AuthController::class, 'reset'])->name('reset');
 
 // routes for admin
 Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function () {
@@ -59,8 +64,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function
         Route::post('/addProduct', [productController::class, 'createProduct'])->name('post.createProduct');
         Route::delete('/product/{id}', [productController::class, 'deleteProduct'])->name('delete.product');
         Route::put('/updateproduct/{id}', [productController::class, 'updateProduct'])->name('post.updateProduct');
+        Route::get('/confirmation-deletion/{id}', [productController::class, 'confirmDeletion'])->name('confirm.deletion');
 
-        // OPTION ROUTES
-        Route::get('/options', [optionsController::class, 'index']);
+        // PRODUCT BY CATEGORY
+        // Route::get('/productbycategory/{id}', [productController::class,  'productByCategory'])->name('product.category');
     });
 });

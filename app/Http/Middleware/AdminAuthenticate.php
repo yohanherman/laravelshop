@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class adminAuth
+class AdminAuthenticate
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class adminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->is_admin == 1) {
-            return $next($request);
-        };
-        // return redirect('admin/login')->with('error', "you don't have access");
-        return redirect()->route('getLogin')->with('error', "you don't have access");
+
+        // Vérifiez si l'utilisateur est connecté et si c'est un administrateur
+        if (Auth::check() && Auth::user()->is_admin != 1) {
+            return redirect('/login')->with('error', 'Accès refusé. Vous devez être administrateur.');
+        }
+
+        return $next($request);
     }
 }

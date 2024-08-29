@@ -36,5 +36,4 @@ class products extends Model
     {
         return $this->hasMany(images::class);
     }
-
 }

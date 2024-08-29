@@ -5,6 +5,8 @@
 @section('content')
 <div>
 
+    <div class="mt-56 mx-5">
+
     <div>
         <div>
             @if(session()->has('success'))
@@ -17,9 +19,6 @@
             @endif
         </div>
 
-    </div>
-
-    <div class="mt-96 mx-5">
         <form action="{{route('post.login')}}" method='POST' class="p-4 border bg-gray-50 h-auto m-auto md:w-96">
             @csrf
             <div class="flex justify-center items-center">
@@ -33,7 +32,7 @@
                     @enderror
                 </div>
                 <div>
-                    <input class='border rounded focus:border-blue-400 focus:outline-none w-full h-10 p-3' type="text" name='password', id='password' placeholder='Password'>
+                    <input class='border rounded focus:border-blue-400 focus:outline-none w-full h-10 p-3' type="text" name='password', id='login_password' placeholder='Password'>
                     @error('password')
                         <p class="text-red-500">{{$message}}</p>
                     @enderror
@@ -43,10 +42,14 @@
                     <input type="checkbox">
                     <label for="remember">Remember me</label>
                 </div> --}}
-                <div class='my-3'>
-                    <a href="{{route('get.register')}}">Not a member yet ?</a>
-                </div>
-
+                <div class="flex justify-between mt-3">
+                    <div class='my-3'>
+                        <a href="{{route('forget-password.get')}}">Password forgotten ?</a>
+                    </div>
+                    <div class='my-3'>
+                        <a href="{{route('get.register')}}">Not a member yet ?</a>
+                    </div>
+                    </div>
                 <div>
                     <input class='bg-blue-500 text-white p-2 rounded my-2' type="submit" value='Sign In'>
                 </div>

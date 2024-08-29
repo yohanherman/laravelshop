@@ -10,7 +10,7 @@
 
           <div class="md:w-1/2 my-auto  ">
             <form class='flex' action="{{route('search')}}" method='GET'>
-            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}'>
+            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Rechercher...'>
             <div dir="rtl">
               <button class='rounded-s-lg p-2 bg-amber-400 relative right-1' type='submit'><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
@@ -23,15 +23,19 @@
             </a>
             <a href="{{route('cart.showCart')}}" class="mr-1">
               <i class="fa-solid fa-cart-shopping"></i>
+              @if($cartCount)
               <span class="cartquantity ">{{$cartCount}}</span>
+              @endif
             </a>
           </div>
         </nav>
+
+
     </header>
   </div> 
 
   <div class="sidebar flex justify-between">
-    <div class="">
+    <div class="md:hidden">
       <ul class="ul">
         <li><a href=""></a>catego</li>
         <li><a href=""></a>inform</li>
@@ -54,22 +58,22 @@
         
           <div class="md:w-1/2 my-auto  ">
             <form class='flex' action="{{route('search')}}" method='GET'>
-            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}'>
+            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Rechercher...'>
             <div dir="rtl">
               <button class='rounded-s-lg p-2 bg-amber-400 relative right-1' type='submit'><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             </form>
           </div>
 
-          <div class='m-5 text-white'>
+          <div class='mr-5 my-auto text-white flex '>
             <a href="#" class="mr-4">
               <i class="fa-solid fa-user"></i>
             </a>
             <a href="{{route('cart.showCart')}}" class="mr-1">
               <i class="fa-solid fa-cart-shopping"></i>
-              {{-- <div class="cartquantity ">{{$cartCount}}</div> --}}
             </a>
           </div>
+          
         </nav>
     </header>
   </div> 
@@ -90,13 +94,4 @@
   </div>
 
   @endif
-
-
-  
-
-
-
-
-
-   
 

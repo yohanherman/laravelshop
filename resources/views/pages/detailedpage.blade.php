@@ -6,7 +6,17 @@
     <div class="my-5 mx-5">
         <div class="p-2 m-auto shadow-md md:w-1/2">
             <div>
-               <img id='product-cover' class="my-3 w-2/3" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
+               <img id='product-cover' class="my-3 w-2/3 mx-auto" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
+            </div>
+
+
+            <div class="font-bold underline mt-10">Images ({{$countImages}})</div>
+            <div>
+                <div class="flex">
+                    @foreach ($images as $image)
+                    <img class="h-10 w-10 ml-2 imageSecondaire" src="{{ asset('images/'.$image->imageCover) }}" alt="image_product" data-image-id='{{$image->id}}'>
+                    @endforeach
+                </div>
             </div>
 
             @if($data->product_discount || $data->product_discount === 0)
@@ -25,33 +35,16 @@
                     </div>
                 @else
                    <p class="font-bold">{{$data->productprice}} €</p>
-                @endif
+                @endif()
 
                 <p>{{$data->description}}</p>
+
 
                 <form action="{{ route('cart.store') }}" method="POST">
                     @csrf
                         <div>
                             <input type="hidden" id='product_id' name='product_id' value='{{$data->id}}'>
                         </div>
-
-
-                        {{-- <div class="flex">
-                            @foreach($options AS $option)
-                            <div class="colorSelect w-auto ml-1 p-1 " 
-                             style ='background-color: {{$option->hex_code}};'
-                             data-colors-id = {{$option->id}}>
-                                    {{$option->colors}}
-                                </div>
-                            @endforeach
-                        </div> --}}
-
-                        {{-- <select class='border font-bold my-2' name="taille_id" id="tailles">
-                            @foreach($sizes as $size)
-                            <option class='' value="{{$size->id}}">{{$size->name}}</option>
-                            @endforeach
-                        </select> --}}
-
 
                         <div class='my-2'>
                             <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2 focus:border-blue-400 focus:outline-none'>

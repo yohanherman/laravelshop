@@ -95,7 +95,6 @@
 @endforeach
 @endif
 
-{{-- <p>total : {{$total}} €</p> --}}
 @if(isset($subtotalAmount))
 <div class="m-3 ">Sous-total <span class='font-bold'>{{ $subtotalAmount}} €</span></div>
 @endif

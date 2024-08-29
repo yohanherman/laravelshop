@@ -27,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
                 // $cart = cart::where('user_id', Auth::user()->user_id)->count();
                 $totalQuantity = cart::where('user_id', Auth::id())->sum('quantity');
                 $view->with('cartCount', $totalQuantity);
-            } else {
-                $view->with('cartCount', '');
             }
 
             $categories = categories::all();

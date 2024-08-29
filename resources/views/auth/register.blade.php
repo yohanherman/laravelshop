@@ -17,13 +17,14 @@
                         @error('name')
                             <span class='text-red-500'>{{$message}}</span>
                         @enderror
+                        <span class="text-red-500 nameError"></span>
                     </div>
                     <div class="my-3">
                         <input  class='border w-full h-10 p-3 rounded focus:border-blue-400 focus:outline-none' type="email" name='email' id='email_register' placeholder='Email'>
                         @error('email')
                             <span class='text-red-500'>{{$message}}</span>
                         @enderror
-                        <span class="emailError"></span>
+                        <span class="text-red-500 emailError"></span>
                     </div>
                     <div class='my-3'>
                         <input  class=' rounded border w-full h-10 p-3 focus:border-blue-400 focus:outline-none' type="password" name='password' id='password' placeholder='Password'>

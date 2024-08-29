@@ -65,5 +65,6 @@
 <script src="{{url('admin/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{url('admin/js/pages/dashboard2.js')}}"></script>
+<script src='{{url('admin/js/adminscript.js')}}'></script>
 </body>
 </html>

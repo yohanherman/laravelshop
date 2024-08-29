@@ -26,8 +26,8 @@
 
       <div>
         @if(session()->has('success'))
-          <p class='alert alert-success' role='alert'>
-            {{session('success')}}
+          <p class='alert alert-success' role='alert' id='messages'>
+           {{session('success')}}
           </p>
         @endif
       </div>
@@ -36,6 +36,12 @@
         <div class="d-flex justify-content-end m-3">
           <a class=' bg-primary p-1 rounded' href="{{route('form.create')}}">add product</a>
         </div>
+
+        @if(!$products || $products->isEmpty())
+            <div class='d-flex justify-content-center'>
+              <p>Your store is currently empty</p>
+            </div>
+        @else
         <table class="table table-dark table-hover">
           <thead>
             <tr>
@@ -62,11 +68,12 @@
               <td><img class='w-25 h-25' src={{asset($product->cover)}} alt={{$product->productname}}></td>
               <td>les avis</td>
               <td class='d-flex '>
-                <form action="{{route('delete.product',$product->id)}}"method='post'>
+                {{-- <form action="{{route('delete.product',$product->id)}}"method='post'>
                     @csrf
                     @method('DELETE')
                   <button type='submit' class="mx-1 bg-danger rounded block border-0 p-1">Delete</button>
-                </form>
+                </form> --}}
+                <a href='{{route('confirm.deletion',$product->id)}}' class="mx-1 bg-danger rounded block border-0 p-1">delete</a>
                 <a href='{{route('get.updateProduct',$product->id)}}' class="bg-primary p-1 rounded mx-1">Edit</a>
                 <a href='{{route('show.product',$product->id)}}' class="bg-primary p-1 rounded bg-success">view</a>
               </td>
@@ -74,7 +81,6 @@
             </tr>
           </tbody>
         @endforeach
-
         </table>
       </div>
 
@@ -96,8 +102,9 @@
         </ul>
       </nav>
 
-    </section>
+      @endif()
 
+    </section>
   </div>
 
 @endsection

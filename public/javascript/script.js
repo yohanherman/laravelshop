@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const burgerremove = document.querySelector('.burger-remove')
     const burger = document.querySelector('.fa-bars')
     const ul = document.querySelector('.ul')
- 
+    const emailLogin = document.querySelector('#login_email');
+    const loginPassword =document.querySelector('#login_password')
+    
     burger.addEventListener('click' , function(e){
         e.preventDefault()
         sidebar.style.transform = 'translateX(0)'
@@ -19,51 +21,72 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.style.visibility= 'visible'
     })
 
+      function isvalidLoginEmail(){
+        emailLogin.addEventListener('blur', function(){
+            if(emailLogin.value.length > 0){
+                if(validateLoginEmail(emailLogin.value)){
+                    console.log('cet bon')
+                }else{
+                    console.log('cest pas bon')
+                }
+            }
+        })
+       
+    }
+    isvalidLoginEmail()
+
+    function validateLoginEmail(email){
+       const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/
+       return regex.test(email)
+    }
+
+    function isvalidLoginEmail(){
+        emailLogin.addEventListener('blur', function(){
+            if(emailLogin.value.length > 0){
+                if(validateLoginEmail(emailLogin.value)){
+                    console.log('cet bon')
+                }else{
+                    console.log('cest pas bon')
+                }
+            }
+        })
+       
+    }
+    isvalidLoginEmail()
+
+
     // REQUETE AJAX
-    const selectColor = document.querySelectorAll('.colorSelect')
-    // const test =document.querySelector('.test')
     const productCover =document.querySelector('#product-cover')
-    const colorInput = document.querySelector('#color_id')
-    const containerColorName = document.querySelector('.containerColor')
-    console.log(containerColorName)
-
-
- 
-    selectColor.forEach(function(div){
+    const imageSecondaires = document.querySelectorAll('.imageSecondaire')
+    
+    imageSecondaires.forEach(function(div){
         div.addEventListener('click', function(){
-            // je recupere la valeur de l'attribut data-colors-id
-            const colorsId = this.getAttribute('data-colors-id')
+        const image_id = this.getAttribute('data-image-id')
+        const url = '/get-product-image/' + image_id
 
-            // je passe cette la valeur de cette id à mon champ caché
-            colorInput.value = colorsId
-
-            const url = '/get-product-image/' + colorsId
-
-            fetch(url)
-                .then(response => {
-                    if(!response.ok){
-                        throw new Error('Erreur HTTP :' + response.status)
-                    }
-                    return response.json();
-                })
-                .then(data=>{
-                    if(data.images){
-                        // productCover.src = ''
-                        productCover.src = data.images
-                    }else{
-                        console.error('aucune image trouvé')
-                    }
-                    containerColorName.innerHTML= data.colors
-                    // console.log('Réponse reçue pour colorsId ' + colorsId + ':', data);
-                })
-                .catch(error =>{
-                    console.error('Erreur lors de la requête pour colorsId:' + colorsId, ':', error);
-                })
+        fetch(url)
+        .then(response=>{
+            if(!response.ok){
+                throw Error('Erreur HTTP :'+ response.status);
+            }
+            return response.json()
+        })
+        .then(data=>{
+            // console.log(data)
+            if(data.image){
+                productCover.src = data.image
+            }else{
+                console.error('No image found')
+            }
+        })
+        .catch(error=>{
+            console.error('Error in the request for imageID :'+ image_id , ':', error)
         })
 
+        })
     })
-
 })
+
 
 // registration field
 const password = document.querySelector('#password')
@@ -72,10 +95,58 @@ const message = document.querySelector('.message')
 const registerButton =document.querySelector('#registerButton')
 const emailError = document.querySelector('.emailError')
 const emailRegister = document.querySelector('#email_register');
+const pseudo =document.querySelector('#name');
+const nameError = document.querySelector('.nameError')
 
 
 registerButton.disabled = true
 registerButton.style.opacity = '0.4'
+
+function validateName(pseudo){
+    const regex = /^[a-zA-Z]+$/;
+    return regex.test(pseudo)
+}
+
+function NameValidation(){
+pseudo.addEventListener('blur', function(){
+    if(pseudo.value.length > 0){
+        if(validateName(pseudo.value)){
+            pseudo.style.borderColor = 'green'
+            nameError.textContent = ''
+        }else{
+        pseudo.style.borderColor = 'red'
+        registerButton.disabled = 'true'
+        nameError.innerHTML= 'invalid name field'
+        }
+}else{
+    nameError.innerHTML= 'field required'
+
+}
+})
+}
+NameValidation()
+
+function validateEmail(email){
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/;
+    return regex.test(email)
+}
+
+// registration form client side
+function validateRegistration(){
+    emailRegister.addEventListener('keyup' , function(){
+        if(validateEmail(emailRegister.value)){
+            // console.log('email correct')
+            emailRegister.style.borderColor = 'green'
+             emailError.textContent = ''
+        }else{
+            // console.log('email incorrect')
+            registerButton.disabled = true
+            registerButton.style.opacity = '0.4' 
+            emailRegister.style.borderColor = 'red'
+            emailError.textContent ='invalid field email'
+        }})
+}
+validateRegistration()
 
 function checkpassword(){
     passwordConfirm.addEventListener('keyup', function(){
@@ -99,48 +170,4 @@ function checkpassword(){
     })
 }
 checkpassword()
-
-function validateEmail(email){
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/;
-    return regex.test(email)
-}
-
-// registration form client side
-function validateRegistration(){
-    emailRegister.addEventListener('keyup' , function(){
-        if(validateEmail(emailRegister.value)){
-            // console.log('email correct')
-            emailRegister.style.borderColor = 'green'
-        }else{
-            // console.log('email incorrect')
-            emailRegister.style.borderColor = 'red'
-            registerButton.disabled = true
-    }})
-    registerButton.addEventListener('click', function(e){
-        if(!emailRegister.value){
-            emailError.textContent = 'The email field is required'
-        }
-    })
-}
-validateRegistration()
-
-
-
-
-
-//login form client side
-// const emailLogin = document.querySelector('#login_email');
-// console.log(emailLogin)
-
-// function validateLoginForm(){
-//     emailLogin.addEventListener('keyup' , function(){
-//         if(validateEmail(emailLogin.value)){
-//             console.log('email correct')
-//             // emailLogin.style.borderColor = 'green'
-//         }else{
-//             console.log('email incorrect')
-//             // emailLogin.style.borderColor = 'red'
-//         }})
-// }
-// validateLoginForm()
 

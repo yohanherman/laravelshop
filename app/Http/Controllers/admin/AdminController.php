@@ -33,7 +33,7 @@ class AdminController extends Controller
         }
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            if(Auth::user() && Auth::user()->is_admin == 1){
+            if(Auth::user() && Auth::user()->is_admin === 1){
                 return redirect()->intended(route('dashboardAdmin'));
             }
         };

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\forgotPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -55,6 +58,59 @@ class AuthController extends Controller
         ]);
         return redirect()->route('login')->with('success', 'account created successfully');
     }
+
+
+    public function forgotPassword()
+    {
+        return view('auth.forgetPassword');
+    }
+
+    public function forgotPasswordPost(Request $request)
+    {
+        $rules = [
+            'email' => 'required|email|exists:users'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user->remember_token = Str::random(40);
+            $user->save();
+            // php artisan make:mail (mailname)
+            Mail::to($user->email)->send(new forgotPasswordMail($user));
+            return redirect()->back()->with('success', 'please check your email and reset your password');
+        };
+    }
+
+    public function reset($token)
+    {
+        $user = User::where('remember_token', $token)->first();
+        if ($user) {
+            // $data['user'] = $user;
+            return view('auth.reset');
+        } else {
+            abort(404);
+        }
+    }
+
+    public function resetPost(Request $request)
+    {
+        $rule = [
+            'email' => 'required|email:exists:users',
+            'newPassword' => 'required|confirmed',
+        ];
+
+        $validator = Validator::make($request->all(), $rule);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // $user =
+    }
+
 
 
     public function logout(Request $request)

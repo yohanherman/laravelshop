@@ -14,10 +14,9 @@ class AdminCartController extends Controller
         // $cart = cart::paginate(2);
         $datas = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
-            ->join('tailles', 'tailles.id', '=', 'carts.taille_id')
             ->join('users', 'users.id', "=", 'carts.user_id')
-            ->select('products.*', 'carts.*', 'tailles.*', 'users.name')
-            ->paginate(1);
+            ->select('products.*', 'carts.*', 'users.name')
+            ->paginate(2);
         // dd($datas);
         return view('admin.cart', ['datas' => $datas]);
     }

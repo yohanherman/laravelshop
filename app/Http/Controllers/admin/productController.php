@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Validator;
 
 class productController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     // Middleware pour protéger toutes les méthodes si l'utilisateur n'est pas admin
+    //     $this->middleware(function ($request, $next) {
+    //         if (auth()->user() && auth()->user()->is_admin != 1) {
+    //             return redirect()->route('login')->with('error', 'Accès refusé. Vous devez être administrateur.');
+    //         }
+    //         return $next($request);
+    //     });
+    // }
+
     public function allProducts()
     {
         $products = products::paginate(2);
@@ -21,7 +33,6 @@ class productController extends Controller
     public function showProduct(int $id)
     {
         $product = DB::table('products')->where('id', $id)->first();
-
         // $option = option::where('product_id', $id)->get();
         // dd($product);
         $context = [
@@ -30,6 +41,16 @@ class productController extends Controller
         ];
         return view('admin.showproduct', $context);
     }
+
+
+
+    // public function productByCategory($category_id)
+    // {
+
+    //     $datas = products::where('categories_id', $category_id)->get();
+    //     return view('admin.prodbycategory', ['datas' => $datas]);
+    //     // dd($data);
+    // }
 
     public function creationProductForm()
     {
@@ -73,6 +94,12 @@ class productController extends Controller
         $data = products::findOrFail($id);
         $data->delete();
         return redirect()->route('get.products')->with('success', 'product successfully deleted');
+    }
+
+    public function confirmDeletion($id)
+    {
+        $product = products::findOrFail($id);
+        return view('admin.deletionConfirmation', ['product' => $product]);
     }
 
     public function updateForm(int $id)
