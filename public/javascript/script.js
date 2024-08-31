@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
     const burgerremove = document.querySelector('.burger-remove')
     const burger = document.querySelector('.fa-bars')
-    const ul = document.querySelector('.ul')
-    const emailLogin = document.querySelector('#login_email');
-    const loginPassword =document.querySelector('#login_password')
+   
     
     burger.addEventListener('click' , function(e){
         e.preventDefault()
@@ -21,39 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebar.style.visibility= 'visible'
     })
 
-      function isvalidLoginEmail(){
-        emailLogin.addEventListener('blur', function(){
-            if(emailLogin.value.length > 0){
-                if(validateLoginEmail(emailLogin.value)){
-                    console.log('cet bon')
-                }else{
-                    console.log('cest pas bon')
-                }
-            }
-        })
-       
-    }
-    isvalidLoginEmail()
-
-    function validateLoginEmail(email){
-       const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/
-       return regex.test(email)
-    }
-
-    function isvalidLoginEmail(){
-        emailLogin.addEventListener('blur', function(){
-            if(emailLogin.value.length > 0){
-                if(validateLoginEmail(emailLogin.value)){
-                    console.log('cet bon')
-                }else{
-                    console.log('cest pas bon')
-                }
-            }
-        })
-       
-    }
-    isvalidLoginEmail()
-
+      
 
     // REQUETE AJAX
     const productCover =document.querySelector('#product-cover')
@@ -108,21 +74,19 @@ function validateName(pseudo){
 }
 
 function NameValidation(){
-pseudo.addEventListener('blur', function(){
-    if(pseudo.value.length > 0){
-        if(validateName(pseudo.value)){
-            pseudo.style.borderColor = 'green'
-            nameError.textContent = ''
+    pseudo.addEventListener('blur', function(){
+        if(pseudo.value.length > 0){
+            if(validateName(pseudo.value)){
+                pseudo.style.borderColor = 'green'
+                nameError.textContent = ''
+            }else{
+            pseudo.style.borderColor = 'red'
+            registerButton.disabled = 'true'
+            nameError.innerHTML= 'invalid name field'
+            }
         }else{
-        pseudo.style.borderColor = 'red'
-        registerButton.disabled = 'true'
-        nameError.innerHTML= 'invalid name field'
-        }
-}else{
-    nameError.innerHTML= 'field required'
-
-}
-})
+        nameError.innerHTML= 'field required'
+    }})
 }
 NameValidation()
 
@@ -170,4 +134,7 @@ function checkpassword(){
     })
 }
 checkpassword()
+
+
+// input d'ajout de quantite au panier
 

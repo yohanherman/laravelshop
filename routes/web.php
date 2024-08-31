@@ -43,6 +43,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('forget-password.get');
 Route::post('/forgot-password', [AuthController::class, 'forgotPasswordPost'])->name('forgot-password.post');
 Route::get('/reset/{token}', [AuthController::class, 'reset'])->name('reset');
+Route::post('/reset/{token}', [AuthController::class, 'resetPost'])->name('reset.post');
 
 // routes for admin
 Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function () {

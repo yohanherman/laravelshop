@@ -19,7 +19,7 @@ class CartController extends Controller
             ->join('products', 'products.id', '=', 'carts.product_id')
             // ->join()
             ->join('users', 'users.id', '=', 'carts.user_id')
-            ->select('products.*', 'carts.*','users.name')
+            ->select('products.*', 'carts.*', 'users.name')
             ->where('carts.user_id', "=", $user_id)
             ->get();
         // dd($data);
@@ -50,13 +50,25 @@ class CartController extends Controller
             return;
         }
         $cartItem = cart::where('product_id', $request->product_id)->first();
-        if ($cartItem) {
+        if ($cartItem && $request->input('quantity') > 0) {
             // dd('je rentre ici');
             $cartItem->quantity += $request->quantity;
             $cartItem->save();
             return redirect()->route('cart.showCart');
+        } elseif ($cartItem && $request->input('quantity') <= 0) {
+            // dd('viens ici');
+            $cartItem->quantity += 1;
+            $cartItem->save();
+            return redirect()->route('cart.showCart');
+        } elseif (!$cartItem && $request->input('quantity') < 0) {
+            // dd(" je rentre ici");
+            // $cart = cart::create([
+            //     'product_id' => $request->input('product_id'),
+            //     'user_id' => $request->input('user_id'),
+            //     'quantity' => $request->quantity
+            // ]);
+            // return redirect()->route('cart.showCart')->with('success', 'successfully added to cart');
         } else {
-            // dd("jai rien trouvé donc je rentre ici");
             $cart = cart::create($request->all());
             return redirect()->route('cart.showCart')->with('success', 'successfully added to cart');
         }

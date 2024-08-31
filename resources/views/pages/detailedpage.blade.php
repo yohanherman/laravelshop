@@ -4,23 +4,29 @@
 
     @section('content')
     <div class="my-5 mx-5">
-        <div class="p-2 m-auto shadow-md md:w-1/2">
+        <div class="p-2 m-auto shadow-md relative ">
+
+            <div class="md:flex">
             <div>
-               <img id='product-cover' class="my-3 w-2/3 mx-auto" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
+               <img id='product-cover' class="my-3 object-contain w-52  mx-auto md:w-64" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
             </div>
 
 
+            <div>
             <div class="font-bold underline mt-10">Images ({{$countImages}})</div>
             <div>
-                <div class="flex">
+                <div class="flex md:flex-col my-10">
                     @foreach ($images as $image)
                     <img class="h-10 w-10 ml-2 imageSecondaire" src="{{ asset('images/'.$image->imageCover) }}" alt="image_product" data-image-id='{{$image->id}}'>
                     @endforeach
                 </div>
             </div>
+            </div>
+
+            </div>
 
             @if($data->product_discount || $data->product_discount === 0)
-            <div class="flex justify-end">
+            <div class="flex justify-end md:absolute top-0 right-0">
                <p class='bg-red-500 w-20 text-white rounded p-1 my-1 '>{{$data->product_discount}} % OFF</p>
             </div>
             @endif

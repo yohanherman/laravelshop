@@ -59,7 +59,6 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'account created successfully');
     }
 
-
     public function forgotPassword()
     {
         return view('auth.forgetPassword');
@@ -91,26 +90,35 @@ class AuthController extends Controller
         $user = User::where('remember_token', $token)->first();
         if ($user) {
             // $data['user'] = $user;
-            return view('auth.reset');
+            return view('auth.reset', ['token' => $token]);
         } else {
             abort(404);
         }
     }
 
-    public function resetPost(Request $request)
+    public function resetPost(Request $request, $token)
     {
-        $rule = [
+        $rules = [
             'email' => 'required|email:exists:users',
             'newPassword' => 'required|confirmed',
         ];
 
-        $validator = Validator::make($request->all(), $rule);
+        $messages = [
+            'newPassword.confirmed' => 'Les mots de passe ne correspondent pas.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        // $user =
+        $user = User::where('remember_token', $token)->first();
+        if ($user) {
+            $user->password = Hash::make($request->newPassword);
+            $user->remember_token = Str::random(40);
+            $user->save();
+            return redirect()->route('login')->with('success', 'password reset successfully you can now connect to your account');
+        }
     }
-
 
 
     public function logout(Request $request)
