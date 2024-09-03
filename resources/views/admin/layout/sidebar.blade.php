@@ -93,31 +93,6 @@
                 @endforeach()
             </ul>
           </li>
-    
-              {{-- </li>
-           
-         
-            
-           
-         
-            <a href="{{route('get.cart')}}" class="nav-link">
-              <i class="nav-icon fas fa-calendar-alt"></i>
-              <p>
-                Cart
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-          
-          </li>
-
-              {{-- <li class="nav-item">
-                <a href="pages/examples/e-commerce.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>E-commerce</p>
-                </a>
-              </li> --}}
              
 
               <li class="nav-item">
@@ -126,18 +101,7 @@
                   <p>Contacts</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/examples/faq.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>FAQ</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/contact-us.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Contact us</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
           {{-- <li class="nav-item">

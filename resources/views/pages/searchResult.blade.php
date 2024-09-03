@@ -8,17 +8,21 @@
     <h3 class="font-bold text-xl">Result of your research</h3>
 </div>
 
- 
-    <div class='grid grid-cols-2 grid-rows-3 mt-10'>
+@if($datas->isEmpty())
+<div class="flex justify-center items-center mt-10">
+    <p>No product found for your research</p>
+</div>
+
+
+@else
+    <div class='grid grid-cols-2 grid-rows-1 mt-10 md:grid-cols-3'>
         @foreach( $datas as $data )
-        <div class="">
             <a class='relative' href="{{url('/productDetailedpage' , $data->id)}}">
                 <div class=" border shadow-lg m-1 rounded-lg ">
-                    <img src="{{asset($data->cover)}}" alt="{{$data->productname}}">
+                    <img class='' src="{{asset($data->cover)}}" alt="{{$data->productname}}">
                     <div class="p-2">
-                        <p class="text-lg capitalize">{{ $data->productname }}</p>
-                        <p class="p">{{ $data->origin}}</p>
-                        <p>ici il y'aura les avis</p>
+                        <p class="text-lg capitalize font-bold">{{ $data->productname }}</p>
+                        <p class="p">{{ Str::limit($data->description,25)}}</p>
 
                         @if(empty($data->product_discount || $data->product_discount === 0))
                             <p class='font-bold'>{{ $data->productprice}} €</p>
@@ -31,7 +35,6 @@
 
                     </div>
 
-                    
                     <div class="absolute top-2 right-2">
                         @if($data->product_discount)
                         <p class='bg-red-600 p-2 text-white rounded'>{{$data->product_discount}} % OFF</p>
@@ -41,8 +44,8 @@
                     </div>
                 </div>
             </a>
-        </div>
         @endforeach
     </div>
+@endif
 
 @endsection

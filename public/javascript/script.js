@@ -8,10 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     burger.addEventListener('click' , function(e){
         e.preventDefault()
         sidebar.style.transform = 'translateX(0)'
+        
     })
     
-    burgerremove.addEventListener('click', function(){
+    burgerremove.addEventListener('click', function(e){
+        e.preventDefault()
         sidebar.style.transform = 'translateX(-100%)'
+       
     })
     
     window.addEventListener('load', function(){

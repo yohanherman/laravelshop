@@ -51,7 +51,7 @@
               <th scope="col">price</th>
               <th scope="col">Origin</th>
               <th scope="col">Cover</th>
-              <th scope="col">Avis</th>
+              {{-- <th scope="col">Avis</th> --}}
               <th scope="col">Action</th>
 
             </tr>
@@ -60,13 +60,13 @@
         @foreach ($products as $product)
           <tbody>
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{$loop->iteration}}</th>
               <td>{{$product->productname}}</td>
-              <td>{{$product->description}}</td>
+              <td>{{ Str::limit($product->description,25)}}</td>
               <td>{{$product->productprice}}</td>
               <td>{{$product->origin}}</td>
               <td><img class='w-25 h-25' src={{asset($product->cover)}} alt={{$product->productname}}></td>
-              <td>les avis</td>
+              {{-- <td>les avis</td> --}}
               <td class='d-flex '>
                 {{-- <form action="{{route('delete.product',$product->id)}}"method='post'>
                     @csrf

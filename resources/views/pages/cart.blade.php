@@ -69,16 +69,6 @@
             </form>  
         </div>
       </div>
-
-{{-- 
-      <div>
-        @if($data->status ===1)
-        <p class="text-green-500 ml-5 my-2">en stock</p>
-        @else
-        <p class='text-green-500'>rupture</p>
-        @endif
-      </div> --}}
-
     </div>
 
     <div class=''>
@@ -89,16 +79,35 @@
         <p class='text-2xl font-bold'> {{$data->productprice}} €</p>
       @endif
     </div>
-    {{-- <p>{{$data->name}}  --}}
+
   </div>
 </div>
 @endforeach
 @endif
 
 @if(isset($subtotalAmount))
-<div class="m-3 ">Sous-total <span class='font-bold'>{{ $subtotalAmount}} €</span></div>
-@endif
+<div class="m-3 ">Sous-total 
+  <span class='font-bold'>{{ $subtotalAmount}} €</span>
+</div>
+{{-- <div class="bg-amber-400 flex justify-center mx-10 p-1 rounded"> --}}
+  <form action="{{route('post.order')}}" method="POST">
+    @csrf
 
+    @foreach($datas AS $index => $item)
+    <input type="text" name="products[{{ $index }}][product_id]" value="{{ $item->id }}">
+    <input type="text" name="products[{{ $index }}][quantity]" value="{{ $item->quantity }}">
+    <input type="text" name="products[{{ $index }}][productprice]" value="{{ $item->productprice}}">
+
+    @endforeach
+
+
+    <input type="text" value='{{$subtotalAmount}}' name='total_amount'>
+    <input type="text" value={{ Auth::user()->id}} name='user_id'>
+  <button type='submit'>passer la commande</button>
+  </form>
+  {{-- <a class="" href="{{route('post.order')}}">passer la commande ({{$cartCount}} articles)</a> --}}
+{{-- </div> --}}
+@endif
 
 @endsection
 

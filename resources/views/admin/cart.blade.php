@@ -27,11 +27,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">name</th>
-            <th scope="col">Description</th>
             <th scope="col">price</th>
-            <th scope="col">Origin</th>
             <th scope="col">Cover</th>
-            <th scope="col">Avis</th>
             <th scope="col">Auteur</th>
             <th scope="col">Action</th>
 
@@ -43,13 +40,10 @@
           <tr>
             <th scope="row">1</th>
             <td>{{$data->productname}}</td>
-            <td>{{$data->description}}</td>
             <td>{{$data->productprice}}</td>
-            <td>{{$data->origin}}</td>
-            <td><img src={{$data->cover}} alt={{$data->productname}}></td>
-            <td>les avis</td>
+            <td class=""><img class="" src={{asset($data->cover)}} alt={{$data->productname}}></td>
             <td>{{$data->name}}</td>
-            <td><a href="">delete</a><a href="">edit</a></td>
+            <td><a href="">delete</a>
             {{-- <td>les avis</td> --}}
           </tr>
         </tbody>

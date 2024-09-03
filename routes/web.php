@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminCartController;
 use App\Http\Controllers\ajaxController;
 use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\HomeControllers;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\ProductdetailedController;
 use App\Http\Controllers\searchController;
 use App\Http\Middleware\adminAuth;
@@ -20,10 +21,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/delete-product/{id}', [CartController::class, 'deleteFromCart'])->name('cart.remove');
     Route::put('/cart/increase-product/{id}', [CartController::class, 'increaseQuantity'])->name('cart.increase');
     Route::put('/cart/decrease-product/{id}', [CartController::class, 'decreaseQuantity'])->name('cart.decrease');
+    Route::post('/order', [orderController::class, 'addOrder'])->name('post.order');
+    Route::get('/order/resume', [orderController::class, 'showOrder'])->name('order.get');
 });
 
 
-Route::get('/', [HomeControllers::class, 'getHomeData']);
+Route::get('/', [HomeControllers::class, 'getHomeData'])->name('home.products');
 Route::get('/productbycategory/{id}', [HomeControllers::class,  'productByCategory'])->name('product.category');
 Route::get('/productDetailedpage/{id}', [ProductdetailedController::class, 'getAProduct']);
 

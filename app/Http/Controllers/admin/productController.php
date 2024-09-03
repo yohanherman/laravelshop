@@ -22,11 +22,18 @@ class productController extends Controller
     public function showProduct(int $id)
     {
         $product = DB::table('products')->where('id', $id)->first();
-        // $option = option::where('product_id', $id)->get();
-        // dd($product);
+         // dd($product);
+         
+        $images = DB::table('images')
+            ->join('products', 'products.id', '=', 'images.product_id')
+            ->select('images.imageCover')
+            ->where('product_id', $id)
+            ->get();
+        // dd($images);
+
         $context = [
             'product' => $product,
-            // 'options' => $option
+            'images'=>$images
         ];
         return view('admin.showproduct', $context);
     }

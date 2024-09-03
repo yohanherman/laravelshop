@@ -31,15 +31,15 @@
               <h4>{{$product->productname}}</h4>
             </div>
           <div class="d-flex">
-             <img src="{{asset($product->cover)}}" alt="{{$product->productname}}"> 
-            <div class='d-flex flex-column'>
-              <img src="" alt="image1">
-              <img src="" alt="image2">
-              <img src="" alt="image3">
-            </div>
-
-     
+             <img class="" src="{{asset($product->cover)}}" alt="{{$product->productname}}"> 
           </div>
+
+
+          @foreach($images AS $image)
+          <img src="{{asset('images/'.$image->imageCover)}}" alt="image">
+         @endforeach
+
+
           <div class="m-1">
             <p>Price : {{$product->productprice}}€</p>
             <p>Description : {{$product->description}}</p>

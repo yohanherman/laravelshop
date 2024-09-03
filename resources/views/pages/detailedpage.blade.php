@@ -4,22 +4,27 @@
 
     @section('content')
     <div class="my-5 mx-5">
-        <div class="p-2 m-auto shadow-md relative ">
-
+        <div class="p-2 m-auto shadow-md relative containerProduct">
             <div class="md:flex">
             <div>
                <img id='product-cover' class="my-3 object-contain w-52  mx-auto md:w-64" src="{{asset($data->cover)}}" alt="{{$data->productname}}">
             </div>
 
-
             <div>
             <div class="font-bold underline mt-10">Images ({{$countImages}})</div>
             <div>
-                <div class="flex md:flex-col my-10">
+
+                @if(!$images->isEmpty())
+                <div class="flex md:flex-col my-1">
                     @foreach ($images as $image)
                     <img class="h-10 w-10 ml-2 imageSecondaire" src="{{ asset('images/'.$image->imageCover) }}" alt="image_product" data-image-id='{{$image->id}}'>
                     @endforeach
                 </div>
+                @else
+                <div class="mb-5">
+                  <p>no available image</p>
+                </div>
+                @endif
             </div>
             </div>
 
@@ -32,7 +37,7 @@
             @endif
 
             <div class="capitalize">
-                <p>{{$data->productname}}</p>
+                <p class="font-bold">{{$data->productname}}</p>
 
                 @if($data->product_discount)
                     <div class='flex'>
@@ -42,9 +47,10 @@
                 @else
                    <p class="font-bold">{{$data->productprice}} €</p>
                 @endif()
-
-                <p>{{$data->description}}</p>
-
+                
+                <div class="text-justify">
+                     <p>{{$data->description}}</p>
+                </div>
 
                 <form action="{{ route('cart.store') }}" method="POST">
                     @csrf
@@ -72,11 +78,6 @@
                         <input class="border w-full bg-amber-400 rounded p-2 opacity-40" type ="submit" disabled value='Ajouter au panier'>
                         @endif
                 </form>
-
-                {{-- @foreach($options AS $option)
-                    <p>{{$option->colors}}</p>
-                @endforeach --}}
-
             </div>
         </div>
     </div>

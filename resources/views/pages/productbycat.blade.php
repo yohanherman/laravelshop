@@ -4,6 +4,10 @@
 
 @section('content')
 
+
+<div class="text-[25px] m-2">
+    <a href="{{ route('home.products')}}"><i class="fa-solid fa-arrow-left"></i></a>
+</div>
 @if(!isset($datas)|| $datas->isEmpty())
 <div class="flex justify-center items-center my-5">
     <p class="">No product available for this category </p>
@@ -16,7 +20,7 @@
             <div class=" border shadow-lg m-1 rounded-lg ">
                 <img src="{{asset($data->cover)}}" alt="{{$data->productname}}">
                 <div class="p-2">
-                    <p class="text-lg capitalize">{{ $data->productname }}</p>
+                    <p class="text-lg capitalize font-bold">{{ $data->productname }}</p>
                     <p class="p">{{ $data->origin}}</p>
                     <p>ici il y'aura les avis</p>
 

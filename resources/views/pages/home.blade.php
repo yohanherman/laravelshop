@@ -22,12 +22,6 @@
     </div>
     </div>
 
-
-    <div>
-        <p>les filtres</p>
-    </div>
-
-
     <div class="font-bold m-3">
         <h4>Vous allez les aimer</h4>
     </div>
@@ -37,9 +31,10 @@
                 <div class="border shadow-lg m-1 rounded-lg">
                     <img class='mx-auto' src="{{asset($randomProduct->cover)}}" alt="{{$randomProduct->productname}}">
                     <div class="p-2">
-                        <p class="text-lg capitalize">{{ $randomProduct->productname }}</p>
-                        <p class="p">{{ $randomProduct->origin}}</p>
-                        <p>ici il y'aura les avis</p>
+                        <p class="text-lg capitalize font-bold">{{ $randomProduct->productname }}</p>
+                        {{-- <p class="p">{{ $randomProduct->origin}}</p> --}}
+
+                        <p>{{ Str::limit($randomProduct->description, 25)}}</p>
 
                         @if(empty($randomProduct->product_discount || $randomProduct->product_discount === 0))
                             <p class='font-bold'>{{ $randomProduct->productprice}} €</p>
@@ -49,7 +44,13 @@
                             <p class='font-bold'>{{$randomProduct->productprice * (1 - $randomProduct->product_discount/100) }} EUR</p>
                         </div>
                         @endif
-
+                        <div class="mt-3">
+                            @if($randomProduct->status === 1)
+                            <p class="text-green-500 text-[20px]">In stock</p>
+                            @else
+                            <p class="text-red-600 text-[20px]">Out of stock</p>
+                            @endif
+                        </div>
                     </div>
 
                     
