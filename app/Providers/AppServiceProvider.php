@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\cart;
 use App\Models\categories;
+use App\Models\status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
 
             $categories = categories::all();
             $view->with('categories', $categories);
+
+            $status = status::all();
+            $view->with('status', $status);
         });
     }
 }

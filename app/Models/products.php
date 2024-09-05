@@ -6,7 +6,7 @@ use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class products extends Model
+class Products extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,6 @@ class products extends Model
         'description',
         'origin',
         'categories_id',
-        // 'Avis_id',
         'product_discount',
         'status',
         'created_at',
@@ -27,13 +26,16 @@ class products extends Model
 
     public function cart()
     {
-        // return $this->belongsTo(cart::class);
         return $this->hasOne(Cart::class, 'product_id');
     }
-
 
     public function images()
     {
         return $this->hasMany(images::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'product_id');
     }
 }

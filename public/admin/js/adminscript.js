@@ -7,6 +7,6 @@ const messages = document.querySelector('#messages')
     setTimeout(() => {
         // console.log('je disparais mainteant')
         messages.style.display ='none'
-    }, 2000);
+    }, 4000);
  }
  removeMessage()

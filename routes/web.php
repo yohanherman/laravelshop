@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\Admin\productController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\AdminCartController;
+use App\Http\Controllers\admin\AdminOrderController;
+use App\Http\Controllers\admin\AdminOrderDetailController;
 use App\Http\Controllers\ajaxController;
 use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\HomeControllers;
@@ -36,7 +38,6 @@ Route::get('/get-product-image/{id}', [ajaxController::class, 'getProductImage']
 // SEARCH ROUTE
 Route::get('/search', [searchController::class, 'seachProduct'])->name('search');
 
-
 // routes for users
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('post.login');
@@ -61,14 +62,20 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\admin')->group(function
         Route::get('/cart', [AdminCartController::class, 'index'])->name('get.cart');
 
         // PRODUCT ROUTES
-        Route::get('/products', [productController::class, 'allProducts'])->name('get.products');
-        Route::get('/product/{id}', [productController::class, 'showProduct'])->name('show.product');
-        Route::get('/addProduct', [productController::class, 'creationProductForm'])->name('form.create');
-        Route::get('/updateProduct/{id}', [productController::class, 'updateForm'])->name('get.updateProduct');
-        Route::post('/addProduct', [productController::class, 'createProduct'])->name('post.createProduct');
-        Route::delete('/product/{id}', [productController::class, 'deleteProduct'])->name('delete.product');
-        Route::put('/updateproduct/{id}', [productController::class, 'updateProduct'])->name('post.updateProduct');
-        Route::get('/confirmation-deletion/{id}', [productController::class, 'confirmDeletion'])->name('confirm.deletion');
+        Route::get('/products', [ProductController::class, 'allProducts'])->name('get.products');
+        Route::get('/product/{id}', [ProductController::class, 'showProduct'])->name('show.product');
+        Route::get('/addProduct', [ProductController::class, 'creationProductForm'])->name('form.create');
+        Route::get('/updateProduct/{id}', [ProductController::class, 'updateForm'])->name('get.updateProduct');
+        Route::post('/addProduct', [ProductController::class, 'createProduct'])->name('post.createProduct');
+        Route::delete('/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+        Route::put('/updateproduct/{id}', [ProductController::class, 'updateProduct'])->name('post.updateProduct');
+        Route::get('/confirmation-deletion/{id}', [ProductController::class, 'confirmDeletion'])->name('confirm.deletion');
+
+        // ORDER ROUTES
+        Route::get('/orders/{order_id}', [AdminOrderDetailController::class, 'show'])->name('get.order_details');
+        Route::get('/orders', [AdminOrderController::class, 'index'])->name('get.orders');
+        Route::get('/order/{id}', [AdminOrderController::class, 'editOrderStatus'])->name('get.orderForm');
+        Route::put('/order/{id}', [AdminOrderController::class, 'editStatus'])->name('edit.status');
 
         // PRODUCT BY CATEGORY
         // Route::get('/productbycategory/{id}', [productController::class,  'productByCategory'])->name('product.category');

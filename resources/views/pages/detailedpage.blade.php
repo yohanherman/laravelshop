@@ -3,7 +3,7 @@
     @include('components.navbar')
 
     @section('content')
-    <div class="my-5 mx-5">
+    <div class="my-5 mx-5 mb-32">
         <div class="p-2 m-auto shadow-md relative containerProduct">
             <div class="md:flex">
             <div>
@@ -68,17 +68,19 @@
 
                         @if($data->status === 1)
                         <p class="text-green-600 font-bold uppercase my-3">en stock</p>    
-                        <div class='flex justify-center'>
-                            <input class="border bg-amber-400 w-full p-2 rounded m-3" type ="submit" value='Ajouter au panier'>
+                        <div class='flex justify-center md:block'>
+                            <input class="border bg-amber-400 w-full p-2 rounded m-3 md:w-40 " type ="submit" value='Ajouter au panier'>
                             {{-- <button class="border bg-amber-400 w-full p-2 rounded m-3" type ="submit">ajouter</button> --}}
                         </div>
                         @else
 
                         <p class="text-red-500 font-bold uppercase my-3">en rupture</p>   
-                        <input class="border w-full bg-amber-400 rounded p-2 opacity-40" type ="submit" disabled value='Ajouter au panier'>
+                        <input class="border w-full bg-amber-400 rounded p-2 opacity-40 " type ="submit" disabled value='Ajouter au panier'>
                         @endif
                 </form>
             </div>
         </div>
     </div>
+
+    @include('components.footer')
     @endsection

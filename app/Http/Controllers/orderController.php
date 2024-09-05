@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\order_details;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class orderController extends Controller
+class OrderController extends Controller
 {
 
     public function showOrder()
@@ -38,7 +39,7 @@ class orderController extends Controller
 
         // j'ajoute les details de la commande
         foreach ($request->products as $product) {
-            order_details::create([
+            OrderDetails::create([
                 'order_id' => $order->id,
                 'product_id' => $product['product_id'],
                 'quantity' => $product['quantity'],

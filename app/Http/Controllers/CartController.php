@@ -47,8 +47,9 @@ class CartController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return;
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $cartItem = cart::where('product_id', $request->product_id)->first();
         if ($cartItem && $request->input('quantity') > 0) {
             // dd('je rentre ici');
@@ -60,20 +61,14 @@ class CartController extends Controller
             $cartItem->quantity += 1;
             $cartItem->save();
             return redirect()->route('cart.showCart');
-        } elseif (!$cartItem && $request->input('quantity') < 0) {
-            // dd(" je rentre ici");
-            // $cart = cart::create([
-            //     'product_id' => $request->input('product_id'),
-            //     'user_id' => $request->input('user_id'),
-            //     'quantity' => $request->quantity
-            // ]);
-            // return redirect()->route('cart.showCart')->with('success', 'successfully added to cart');
-        } else {
+        } elseif (!$cartItem && $request->input('quantity') >= 1) {
             $cart = cart::create($request->all());
             return redirect()->route('cart.showCart')->with('success', 'successfully added to cart');
+        } else {
+            dd("quantite selectionnee non valide");
         }
     }
-
+    
     public function deleteFromCart(int $id)
     {
         // dd('deleted now');

@@ -28,7 +28,7 @@
             <th scope="col">#</th>
             <th scope="col">name</th>
             <th scope="col">price</th>
-            <th scope="col">Cover</th>
+            <th scope="col">quantity</th>
             <th scope="col">Auteur</th>
             <th scope="col">Action</th>
 
@@ -38,13 +38,13 @@
       @foreach ($datas as $data)
         <tbody>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{$loop->iteration}}</th>
             <td>{{$data->productname}}</td>
             <td>{{$data->productprice}}</td>
-            <td class=""><img class="" src={{asset($data->cover)}} alt={{$data->productname}}></td>
+            <td>{{$data->quantity}}</td>
             <td>{{$data->name}}</td>
             <td><a href="">delete</a>
-            {{-- <td>les avis</td> --}}
+    
           </tr>
         </tbody>
       @endforeach

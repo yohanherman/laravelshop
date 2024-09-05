@@ -34,11 +34,9 @@
              <img class="" src="{{asset($product->cover)}}" alt="{{$product->productname}}"> 
           </div>
 
-
-          @foreach($images AS $image)
+          {{-- @foreach($images AS $image)
           <img src="{{asset('images/'.$image->imageCover)}}" alt="image">
-         @endforeach
-
+         @endforeach --}}
 
           <div class="m-1">
             <p>Price : {{$product->productprice}}€</p>

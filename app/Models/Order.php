@@ -15,8 +15,8 @@ class Order extends Model
         'order_date'
     ];
 
-    public function orderDetails()
-    {
-        return $this->hasMany(order_details::class);
-    }
+    // public function orderDetails()
+    // {
+    //     return $this->hasMany(order_details::class);
+    // }
 }

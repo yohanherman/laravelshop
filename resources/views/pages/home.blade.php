@@ -1,6 +1,7 @@
 @extends('base')
     
 @include('components.navbar')
+
 @section('title', 'Home')
 
 @section('content')
@@ -25,7 +26,7 @@
     <div class="font-bold m-3">
         <h4>Vous allez les aimer</h4>
     </div>
-    <div class='grid grid-cols-2 grid-rows-1 mt-5 md:flex '>
+    <div class='mb-40 grid grid-cols-2 grid-rows-1 mt-5 md:flex '>
         @foreach( $randomProducts as $randomProduct )
             <a class='relative' href="{{url('/productDetailedpage' , $randomProduct->id)}}">
                 <div class="border shadow-lg m-1 rounded-lg">
@@ -66,8 +67,10 @@
         @endforeach
     </div>
 
-
+ 
+    @include('components.footer')
 @endsection
+
 
 
 

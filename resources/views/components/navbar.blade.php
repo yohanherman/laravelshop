@@ -19,7 +19,6 @@
             </form>
           </div>
 
-
           <div class="sidebar flex justify-between"> 
               <ul>
                <li><a href="#">Home</a></li>
@@ -33,14 +32,14 @@
          </div>
 
           <div class='mr-5 my-auto text-white flex profilCart'>
-            <a href="#" class="mr-4 mt-1">
+            {{-- <a href="#" class="mr-4 mt-1">
               <i class="fa-solid fa-user"></i>
-            </a>
+            </a> --}}
             <a href="{{route('cart.showCart')}}" class="mr-1">
               <i class="fa-solid fa-cart-shopping"></i>
-              {{-- @if($cartCount)
+              @if($cartCount)
               <span class="cartquantity">{{$cartCount}}</span>
-              @endif --}}
+              @endif
             </a>
           </div>
         </nav>
@@ -56,10 +55,7 @@
     </div>
   </div> 
 
-
-
   @else
-
 
   <div>
     <header class="mb-5">
@@ -71,7 +67,7 @@
         
           <div class="md:w-1/2 my-auto searchcontainer ">
             <form class='flex' action="{{route('search')}}" method='GET'>
-            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Rechercher...'>
+            <input class="mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Research...'>
             <div dir="rtl">
               <button class='rounded-s-lg p-2 bg-amber-400 relative right-1' type='submit'><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
@@ -92,9 +88,9 @@
          </div>
 
           <div class='mr-5 my-auto text-white flex profilCart'>
-            <a href="#" class="mr-4">
+            {{-- <a href="#" class="mr-4">
               <i class="fa-solid fa-user"></i>
-            </a>
+            </a> --}}
             <a href="{{route('cart.showCart')}}" class="mr-1">
               <i class="fa-solid fa-cart-shopping"></i>
             </a>
@@ -105,7 +101,7 @@
 
     <div class="mt-10 md:w-1/2 searchcontainer2 ">
       <form class='flex' action="{{route('search')}}" method='GET'>
-      <input class="inputSearch mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Rechercher...'>
+      <input class="inputSearch mr-25 w-52 outline-none pl-2 pr-5 rounded md:w-full" type="text" name='product_name' value='{{request('product_name')}}' placeholder='Research...'>
       <div dir="rtl">
         <button class='rounded-s-lg p-2 bg-amber-400 relative right-1' type='submit'><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
