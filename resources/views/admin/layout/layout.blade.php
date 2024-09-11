@@ -7,6 +7,8 @@
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  {{-- bootstrapcdd --}}
+  {{-- <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ url('admin/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- overlayScrollbars -->
@@ -19,7 +21,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{asset('admin/images/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="{{url('admin/images/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
 
@@ -54,17 +56,17 @@
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
-<script src="{{url('admin/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
-<script src="{{url('admin/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{url('admin/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{url('admin/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
+<script src="{{asset('admin/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
+<script src="{{asset('admin/plugins/raphael/raphael.min.js')}}"></script>
+<script src="{{asset('admin/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
+<script src="{{asset('admin/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 <!-- ChartJS -->
-<script src="{{ url('admin/plugins/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/chart.js/Chart.min.js') }}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="{{url('admin/js/demo.js')}}"></script>
+<script src="{{asset('admin/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{url('admin/js/pages/dashboard2.js')}}"></script>
-<script src='{{url('admin/js/adminscript.js')}}'></script>
+<script src="{{asset('admin/js/pages/dashboard2.js')}}"></script>
+<script src='{{asset('admin/js/adminscript.js')}}'></script>
 </body>
 </html>

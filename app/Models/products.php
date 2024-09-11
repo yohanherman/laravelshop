@@ -23,7 +23,6 @@ class Products extends Model
         'cover'
     ];
 
-
     public function cart()
     {
         return $this->hasOne(Cart::class, 'product_id');
@@ -37,5 +36,9 @@ class Products extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetails::class, 'product_id');
+    }
+    public function categories()
+    {
+        return $this->belongsTo(categories::class);
     }
 }

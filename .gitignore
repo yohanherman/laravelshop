@@ -19,3 +19,8 @@ yarn-error.log
 /.idea
 /.vscode
 /public/images
+.dockerignore
+
+db_data/mysql.sock
+
+

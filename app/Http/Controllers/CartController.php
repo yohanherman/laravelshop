@@ -17,22 +17,13 @@ class CartController extends Controller
         }
         $datas = DB::table('carts')
             ->join('products', 'products.id', '=', 'carts.product_id')
-            // ->join()
             ->join('users', 'users.id', '=', 'carts.user_id')
             ->select('products.*', 'carts.*', 'users.name')
             ->where('carts.user_id', "=", $user_id)
             ->get();
         // dd($data);
-
-        $total = DB::table('carts')
-            ->join('products', 'products.id', '=', 'carts.product_id')
-            ->where('carts.user_id', '=', $user_id)
-            ->selectRaw('SUM(carts.quantity * products.productprice) AS total')
-            ->first();
-
         $context = [
             'datas' => $datas,
-            'total' => $total->total
         ];
         return view('pages.cart', $context);
     }
@@ -49,7 +40,6 @@ class CartController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
         $cartItem = cart::where('product_id', $request->product_id)->first();
         if ($cartItem && $request->input('quantity') > 0) {
             // dd('je rentre ici');

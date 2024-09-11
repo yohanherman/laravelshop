@@ -57,25 +57,23 @@
                         <div>
                             <input type="hidden" id='product_id' name='product_id' value='{{$data->id}}'>
                         </div>
-
                         <div class='my-2'>
-                            <input type="number" id='quantity' name='quantity' value ='1' class='border rounded bg-gray-100 pl-2 focus:border-blue-400 focus:outline-none'>
+                            <input type="number" id='quantity' name='quantity' value ='1' 
+                             class='border rounded bg-gray-100 pl-2 focus:border-blue-400 focus:outline-none'>
                         </div>
-
                         @auth
                           <input type='hidden' value='{{ Auth::user()->id }}' name="user_id">
                         @endauth
-
                         @if($data->status === 1)
                         <p class="text-green-600 font-bold uppercase my-3">en stock</p>    
                         <div class='flex justify-center md:block'>
-                            <input class="border bg-amber-400 w-full p-2 rounded m-3 md:w-40 " type ="submit" value='Ajouter au panier'>
-                            {{-- <button class="border bg-amber-400 w-full p-2 rounded m-3" type ="submit">ajouter</button> --}}
+                            <input class="border bg-amber-400 w-full p-2 rounded m-3 md:w-40 " type ="submit" 
+                             value='Ajouter au panier'>
                         </div>
                         @else
-
                         <p class="text-red-500 font-bold uppercase my-3">en rupture</p>   
-                        <input class="border w-full bg-amber-400 rounded p-2 opacity-40 " type ="submit" disabled value='Ajouter au panier'>
+                             <input class="border w-full bg-amber-400 rounded p-2 opacity-40 " 
+                              type ="submit" disabled value='Ajouter au panier'>
                         @endif
                 </form>
             </div>
